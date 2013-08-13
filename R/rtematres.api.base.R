@@ -1,35 +1,37 @@
 #' Basic tematres server api
 #'
-#' @param task The api task you like to execute. Use the the "availableTasks" to get an overview about
-#'        the base api. It returns a data frame with descriptions and the arguments for the tasks.
+#' @param task The api task you like to execute. Use the the "availableTasks"
+#' 	  to get an overview about the base api. It returns a data frame with
+#'        descriptions and the arguments for the tasks.
 #'
-#' @param argument Is the argument for the api task. You find the information about the arguments when
-#' 	  you call the task "availableTasks".
+#' @param argument Is the argument for the api task. You find the information
+#'        about the arguments when you call the task "availableTasks".
 #'
-#' @return The function returns either a dataframe for information or a list of keywords and ids
+#' @return The function returns either a dataframe for information or a list
+#'         of keywords and ids
 #' @examples \dontrun{
-#'	 rtematres.api(task = "availableTasks")
-#'	 rtematres.api(task = "fetchVocabularyData")
-#'	 rtematres.api(task = "fetchTopTerms")
-#'	 rtematres.api(task = "search", argument = "measurement")
-#'	 rtematres.api(task = "letter", argument = "t")
-#'	 rtematres.api(task = "fetchTerm", argument = 12)
-#'	 rtematres.api(task = "fetchDown", argument = 4 )
-#'	 rtematres.api(task = "fetchUp", argument = 4)
-#'	 rtematres.api(task = "fetchRelated", argument = 4) # there are no realted terms atm
-#'	 rtematres.api(task = "fetchAlt", argument = 12 )
-#'	 rtematres.api(task = "fetchCode", argument = "tree") # i do not know how this works
-#'	 rtematres.api(task = "fetchNotes", argument = 5 ) # this will require another extraction  sheme
-#'	 rtematres.api(task = "fetchDirectTerms", argument = 12)
-#'	 rtematres.api(task = "fetchURI", argument = 12) # this will require another extraction  sheme
-#'	 rtematres.api(task = "fetchTargetTerms", argument = 12 ) # no target terms atm
-#'	 rtematres.api(task = "fetchSourceTerm", argument = 12) # not avail atm
-#'	 rtematres.api(task = "fetchTerms", argument = '12,13' ) # may need treatment for multiple arguments
-#'	 rtematres.api(task = "fetchRelatedTerms", argument = '12,13' )
-#'	 rtematres.api(task = "fetchSimilar", argument = 12)
-#'	 rtematres.api(task = "fetchLast")
-#'	 rtematres.api.conversion.keyword_id(given = "Measurement")
-#'	 rtematres.api.conversion.keyword_id(given = 8)
+#'     rtematres.api(task = "availableTasks")
+#'     rtematres.api(task = "fetchVocabularyData")
+#'     rtematres.api(task = "fetchTopTerms")
+#'     rtematres.api(task = "search", argument = "measurement")
+#'     rtematres.api(task = "letter", argument = "t")
+#'     rtematres.api(task = "fetchTerm", argument = 12)
+#'     rtematres.api(task = "fetchDown", argument = 4 )
+#'     rtematres.api(task = "fetchUp", argument = 4)
+#'     rtematres.api(task = "fetchRelated", argument = 4)
+#'     rtematres.api(task = "fetchAlt", argument = 12 )
+#'     rtematres.api(task = "fetchCode", argument = "tree")
+#'     rtematres.api(task = "fetchNotes", argument = 5 )
+#'     rtematres.api(task = "fetchDirectTerms", argument = 12)
+#'     rtematres.api(task = "fetchURI", argument = 12)
+#'     rtematres.api(task = "fetchTargetTerms", argument = 12 )
+#'     rtematres.api(task = "fetchSourceTerm", argument = 12)
+#'     rtematres.api(task = "fetchTerms", argument = '12,13' )
+#'     rtematres.api(task = "fetchRelatedTerms", argument = '12,13' )
+#'     rtematres.api(task = "fetchSimilar", argument = 12)
+#'     rtematres.api(task = "fetchLast")
+#'     rtematres.api.conversion.keyword_id(given = "Measurement")
+#'     rtematres.api.conversion.keyword_id(given = 8)
 #'  }
 #'
 #' @import RCurl
@@ -169,8 +171,8 @@ rtematres.api.define <- function(term) {
 #' the appropriate funtions depending on the search task.
 #'
 #' @param term The term you are looking for
-#' @param task Defines behavior on search. Defaults to "search" but can also be
-#'        "broader" (look for upward definitions) and "narrower" (looking for downward definitions).
+#' @param task Defines behavior on search. Defaults to "search" but can also be "broader"
+#'        (look for upward definitions) and "narrower" (looking for downward definitions).
 #'
 #' @return The function returns a vector of keywords
 #' @export rtematres.api.search
