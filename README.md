@@ -1,8 +1,26 @@
 # rtematres
 
-An API package to exploit vocabularies managed via a tematres thesaurus. It gives you
-access to the base API functions and their documentation. Next to the base API functions
+An API package to exploit vocabularies managed via a [tematres thesaurus](http://www.vocabularyserver.com/).
+It gives you access to the base API functions and their documentation. Next to the base API functions
 there are some convenience functions that foster exploiting the vocabulary.
+
+## Install
+
+### From CRAN (pending)
+
+```
+install.packages("rtematres")
+```
+
+### From github (attention may be in unstable state!)
+
+```
+# install devtools package if you don't have it.
+install.packages("devtools")
+# install rtematres package from github
+library(devtools)
+install_github(username = "cpfaff", repo = "rtematres")
+```
 
 ## Set or querry options
 
@@ -57,3 +75,7 @@ rtematres.api.search(term = "Location")
 rtematres.api.search(term = "Location", task="fetchUp")
 rtematres.api.search(term = "Location", task="fetchDown")
 ```
+
+
+
+
