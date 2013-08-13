@@ -13,7 +13,7 @@ there are some convenience functions that foster exploiting the vocabulary.
 * Set tematres url
 
 `rtematres.options("tematres_url" = "http://url.to/your/tematres/server")`
-`rtematres.options("tematres_api_url" = "http://url.to/your/tematres/server/api")`
+`rtematres.options("tematres_service_url" = "http://url.to/your/tematres/server/api")`
 
 ## base API tasks
 
