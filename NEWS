@@ -1,0 +1,7 @@
+rtematres 0.1
+==================
+
+* Initial version of rtematres. Introduces the base api functions
+* Also comes with helpers to convert an id to a key and vice versa 
+* Higher functions that leverage the search for terms, relations to upper 
+  and narrower keywords as well as desriptions.  

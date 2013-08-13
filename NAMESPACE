@@ -1,0 +1,8 @@
+export(rtematres.api)
+export(rtematres.api.conversion.key_id)
+export(rtematres.api.define)
+export(rtematres.api.search)
+export(rtematres.options)
+import(RCurl)
+import(XML)
+import(gdata)
