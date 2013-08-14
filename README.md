@@ -5,9 +5,9 @@ hosted on any [tematres server](http://www.vocabularyserver.com/) instance.
 It gives you access to the base API functions and their documentation and offers convenient
 wrapper functions that ease the explotion of the vocabolary.
 
-## Install
+### Install
 
-### From CRAN
+#### From CRAN
 
 Find the package and manual on [CRAN](http://cran.r-project.org/web/packages/rtematres/index.html). You 
 can simply install the version hosted there issuing the command below:
@@ -16,7 +16,7 @@ can simply install the version hosted there issuing the command below:
 install.packages("rtematres")
 ```
 
-### From github 
+#### From github 
 
 The installation from Github requires the `devtools` package.
 
@@ -28,9 +28,9 @@ library(devtools)
 install_github(username = "cpfaff", repo = "rtematres")
 ```
 
-## Usage
+### Usage
 
-### Load the package
+#### Load the package
 
 After installation load the package: 
 
@@ -38,7 +38,7 @@ After installation load the package:
 library(rtematres)
 ```
 
-### Options
+#### Options
 
 * List options
 
@@ -52,7 +52,7 @@ library(rtematres)
 Note: `tematres_url` is informative only atm but you need to set the url in `tematres_service_ur` 
 to the `services.php` of the tematres server. This is the the access to the api.
 
-## base API tasks
+### Base API tasks
 
 Below you find the base api tasks. As you can see some of them only take ids of terms. As you 
 usually not know the id of a term as the term is what you are looking there are convenience 
@@ -106,9 +106,10 @@ rtematres.api.conversion.term_id(given = "Contex")
 ```
 
 
-## Version 0.2 will introduce more convenience (not on CRAN yet)
+## Version 0.2
 
-This functions take strings as input only for the tasks you like to perform on
+Will offer more convenience but is not on CRAN yet.This functions take strings
+as input only for the tasks you like to perform on
 them. This makes it easier to exploit the vocabulary as you do not have to
 convert the term into an id in dorder to use the base api functions.
 
@@ -136,8 +137,6 @@ rtematres.api.do(task = "fetchRelatedTerms", term = c("Context", "tree"))
 rtematres.api.do(task = "fetchSimilar", term = "tree")
 rtematres.api.do(task = "fetchLast")
 ```
-
-
 
 ## Other convenience functions 
 
