@@ -1,23 +1,29 @@
-# rtematres
+# The R package for tematres 
 
-An API package to exploit vocabularies managed via a [tematres thesaurus](http://www.vocabularyserver.com/).
-It gives you access to the base API functions and their documentation. Next to the base API functions
-there are some convenience functions that foster exploiting the vocabulary.
+The `rtematres` package is an api package to exploit formal representations of knowledge 
+hosted on any [tematres server](http://www.vocabularyserver.com/) instance.
+It gives you access to the base API functions and their documentation and offers convenient
+wrapper functions that ease the explotion of the vocabolary.
 
 ## Install
 
 ### From CRAN (pending)
 
+Find the package and manual on [CRAN](http://cran.r-project.org/web/packages/rtematres/index.html). You 
+can simply install the version hosted there issuing the command below:
+
 ```
 install.packages("rtematres")
 ```
 
-### From github (attention may be in unstable state!)
+### From github 
+
+The installation from Github requires the `devtools` package.
 
 ```
-# install devtools package if you don't have it.
+# install devtools:
 install.packages("devtools")
-# install rtematres package from github
+# install rtematres:
 library(devtools)
 install_github(username = "cpfaff", repo = "rtematres")
 ```
