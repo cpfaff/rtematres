@@ -1,12 +1,11 @@
-\name{rtematres.api.conversion.key_id}
-\alias{rtematres.api.conversion.key_id}
+\name{rtematres.api.conversion.term_id}
+\alias{rtematres.api.conversion.term_id}
 \title{An tematres api helper that converts ids to strings and vise versa}
 \usage{
-  rtematres.api.conversion.key_id(given, warn = T)
+  rtematres.api.conversion.term_id(given, warn = T)
 }
 \arguments{
-  \item{given}{Either a keyword string or an integer id for
-  a term}
+  \item{given}{Either a term or an integer id for a term}
 
   \item{warn}{Give a waring when the term/id is not found.
   Defaults to TRUE.}
@@ -20,6 +19,6 @@
   each other. It has two function names tha you can use
   depending on what you are converting. But both function
   names do the same so they can be exchanged.
-  (rtematres.api.conversion.[key_id/id_key])
+  (rtematres.api.conversion.[term_id/id_term])
 }
 

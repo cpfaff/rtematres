@@ -9,7 +9,7 @@
 #' @export rtematres.api.define
 
 rtematres.api.define <- function(term) {
-  id = rtematres.api.conversion.key_id(term, warn = F)
+  id = rtematres.api.conversion.term_id(term, warn = F)
   term_notes = rtematres.api(task = "fetchNotes", argument = id)
   term_notes$description = clean_html_string(term_notes$description)
   return(term_notes)
@@ -35,13 +35,13 @@ rtematres.api.search <- function(term, task="search") {
     }
   if (task=="fetchUp")
     {
-      id = rtematres.api.conversion.key_id(term, warn = F)
+      id = rtematres.api.conversion.term_id(term, warn = F)
       results = rtematres.api(task = "fetchUp", argument = id)
       return(results)
     }
   if (task=="fetchDown")
     {
-      id = rtematres.api.conversion.key_id(term, warn = F)
+      id = rtematres.api.conversion.term_id(term, warn = F)
       results = rtematres.api(task = "fetchDown", argument = id)
       return(results)
     }
@@ -82,13 +82,14 @@ rtematres.api.search <- function(term, task="search") {
 #'     rtematres.api.do(task = "fetchSimilar", term = "tree")
 #'     rtematres.api.do(task = "fetchLast")
 #'   }
+#' @import plyr
 #' @export rtematres.api.do
 
 rtematres.api.do <- function(task = "availableTasks", term) {
   if (task == "availableTasks")
     {
       results = rtematres.api(task = "availableTasks")
-      results = arrange(results,(tasks_available))
+      results = arrange(results,(results))
       return(results)
     }
   if (task == "search")
@@ -98,80 +99,80 @@ rtematres.api.do <- function(task = "availableTasks", term) {
     }
   if (task=="fetchUp")
     {
-      id = rtematres.api.conversion.key_id(term, warn = F)
+      id = rtematres.api.conversion.term_id(term, warn = F)
       results = rtematres.api(task = "fetchUp", argument = id)
       return(results)
     }
   if (task=="fetchDown")
     {
-      id = rtematres.api.conversion.key_id(term, warn = F)
+      id = rtematres.api.conversion.term_id(term, warn = F)
       results = rtematres.api(task = "fetchDown", argument = id)
       return(results)
     }
   if (task == "fetchTerm")
     {
-      id = rtematres.api.conversion.key_id(term, warn = F)
+      id = rtematres.api.conversion.term_id(term, warn = F)
       results = rtematres.api(task = "fetchTerm", argument = id)
       return(results)
     }
   if (task == "fetchTerms")
     {
-      id = paste(sapply(term, function(x) rtematres.api.conversion.key_id(x, warn = F), USE.NAMES = F), collapse = ",")
+      id = paste(sapply(term, function(x) rtematres.api.conversion.term_id(x, warn = F), USE.NAMES = F), collapse = ",")
       results = rtematres.api(task = "fetchTerms", argument = id)
       return(results)
     }
   if (task == "fetchRelated")
     {
-      id = rtematres.api.conversion.key_id(term, warn = F)
+      id = rtematres.api.conversion.term_id(term, warn = F)
       results = rtematres.api(task = "fetchRelated", argument = id)
       return(results)
     }
   if (task == "fetchAlt")
     {
-      id = rtematres.api.conversion.key_id(term, warn = F)
+      id = rtematres.api.conversion.term_id(term, warn = F)
       results = rtematres.api(task = "fetchAlt", argument = id)
       return(results)
     }
   if (task == "fetchNotes")
     {
-      id = rtematres.api.conversion.key_id(term, warn = F)
+      id = rtematres.api.conversion.term_id(term, warn = F)
       results = rtematres.api(task = "fetchNotes", argument = id)
       results$description = clean_html_string(results$description)
       return(results)
     }
   if (task == "fetchDirectTerms")
     {
-      id = rtematres.api.conversion.key_id(term, warn = F)
+      id = rtematres.api.conversion.term_id(term, warn = F)
       results = rtematres.api(task = "fetchDirectTerms", argument = id)
       return(results)
     }
   if (task == "fetchURI")
     {
-      id = rtematres.api.conversion.key_id(term, warn = F)
+      id = rtematres.api.conversion.term_id(term, warn = F)
       results = rtematres.api(task = "fetchURI", argument = id)
       return(results)
     }
   if (task == "fetchTargetTerms")
     {
-      id = rtematres.api.conversion.key_id(term, warn = F)
+      id = rtematres.api.conversion.term_id(term, warn = F)
       results = rtematres.api(task = "fetchTargetTerms", argument = id)
       return(results)
     }
   if (task == "fetchSourceTerms")
     {
-      id = rtematres.api.conversion.key_id(term, warn = F)
+      id = rtematres.api.conversion.term_id(term, warn = F)
       results = rtematres.api(task = "fetchSourceTerms", argument = id)
       return(results)
     }
   if (task == "fetchRelatedTerms")
     {
-      id = paste(sapply(term, function(x) rtematres.api.conversion.key_id(x, warn = F), USE.NAMES = F), collapse = ",")
+      id = paste(sapply(term, function(x) rtematres.api.conversion.term_id(x, warn = F), USE.NAMES = F), collapse = ",")
       results = rtematres.api(task = "fetchRelatedTerms", argument = id)
       return(results)
     }
   if (task == "fetchSimilar")
     {
-      id = rtematres.api.conversion.key_id(term, warn = F)
+      id = rtematres.api.conversion.term_id(term, warn = F)
       results = rtematres.api(task = "fetchSimilar", argument = id)
       return(results)
     }
