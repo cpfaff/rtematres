@@ -89,7 +89,7 @@ rtematres.api.do <- function(task = "availableTasks", term) {
   if (task == "availableTasks")
     {
       results = rtematres.api(task = "availableTasks")
-      results = arrange(results,(results))
+      results = arrange(results,(results$tasks_available))
       return(results)
     }
   if (task == "search")
