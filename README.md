@@ -60,6 +60,37 @@ rtematres.api(task = "fetchSimilar", argument = 12)
 rtematres.api(task = "fetchLast")
 ```
 
+## since version 0.2 these convenience functions are available (not on cran yet)
+
+This functions take strings as input only for the tasks you like to perform on
+them. This makes it easier to exploit the vocabulary as you do not have to
+convert the term into an id indorder to use the base api functions.
+
+```
+rtematres.api.do(task = "availableTasks")
+rtematres.api.do(task = "fetchVocabularyData")
+rtematres.api.do(task = "suggest", term = "measurement")
+rtematres.api.do(task = "suggestDetails", term = "measurement")
+rtematres.api.do(task = "fetchTopTerms")
+rtematres.api.do(task = "search", term = "measurement")
+rtematres.api.do(task = "letter", term = "t")
+rtematres.api.do(task = "fetchTerm", term = "tree")
+rtematres.api.do(task = "fetchTerms", term = c("Context", "tree") )
+rtematres.api.do(task = "fetchDown", term = "Context")
+rtematres.api.do(task = "fetchUp", term = "measurement")
+rtematres.api.do(task = "fetchRelated", term = "tree")
+rtematres.api.do(task = "fetchAlt", term = "tree" )
+rtematres.api.do(task = "fetchCode", term = "tree")
+rtematres.api.do(task = "fetchNotes", term = "Context")
+rtematres.api.do(task = "fetchDirectTerms", term = "carbon")
+rtematres.api.do(task = "fetchURI", term = "carbon")
+rtematres.api.do(task = "fetchTargetTerms", term = "carbon")
+rtematres.api.do(task = "fetchSourceTerm", term = "Context")
+rtematres.api.do(task = "fetchRelatedTerms", term = c("Context", "tree"))
+rtematres.api.do(task = "fetchSimilar", term = "tree")
+rtematres.api.do(task = "fetchLast")
+```
+
 ## helper
 
 ```
