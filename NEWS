@@ -1,3 +1,10 @@
+rtematres 0.2
+==================
+
+* introduces a convenience function for all tasks that takes strings as 
+  input only. So you do not have to transform the term you are looking
+  for into an id to communicate with the server anymore. 
+
 rtematres 0.1
 ==================
 

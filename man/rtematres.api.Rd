@@ -23,28 +23,28 @@
 }
 \examples{
 \dontrun{
-	 rtematres.api(task = "availableTasks")
-	 rtematres.api(task = "fetchVocabularyData")
-	 rtematres.api(task = "fetchTopTerms")
-	 rtematres.api(task = "search", argument = "measurement")
-	 rtematres.api(task = "letter", argument = "t")
-	 rtematres.api(task = "fetchTerm", argument = 12)
-	 rtematres.api(task = "fetchDown", argument = 4 )
-	 rtematres.api(task = "fetchUp", argument = 4)
-	 rtematres.api(task = "fetchRelated", argument = 4) # there are no realted terms atm
-	 rtematres.api(task = "fetchAlt", argument = 12 )
-	 rtematres.api(task = "fetchCode", argument = "tree") # i do not know how this works
-	 rtematres.api(task = "fetchNotes", argument = 5 ) # this will require another extraction  sheme
-	 rtematres.api(task = "fetchDirectTerms", argument = 12)
-	 rtematres.api(task = "fetchURI", argument = 12) # this will require another extraction  sheme
-	 rtematres.api(task = "fetchTargetTerms", argument = 12 ) # no target terms atm
-	 rtematres.api(task = "fetchSourceTerm", argument = 12) # not avail atm
-	 rtematres.api(task = "fetchTerms", argument = '12,13' ) # may need treatment for multiple arguments
-	 rtematres.api(task = "fetchRelatedTerms", argument = '12,13' )
-	 rtematres.api(task = "fetchSimilar", argument = 12)
-	 rtematres.api(task = "fetchLast")
-	 rtematres.api.conversion.keyword_id(given = "Measurement")
-	 rtematres.api.conversion.keyword_id(given = 8)
+    rtematres.api(task = "availableTasks")
+    rtematres.api(task = "fetchVocabularyData")
+    rtematres.api(task = "fetchTopTerms")
+    rtematres.api(task = "search", argument = "measurement")
+    rtematres.api(task = "letter", argument = "t")
+    rtematres.api(task = "fetchTerm", argument = 12)
+    rtematres.api(task = "fetchDown", argument = 4 )
+    rtematres.api(task = "fetchUp", argument = 4)
+    rtematres.api(task = "fetchRelated", argument = 4)
+    rtematres.api(task = "fetchAlt", argument = 12 )
+    rtematres.api(task = "fetchCode", argument = "tree")
+    rtematres.api(task = "fetchNotes", argument = 5 )
+    rtematres.api(task = "fetchDirectTerms", argument = 12)
+    rtematres.api(task = "fetchURI", argument = 12)
+    rtematres.api(task = "fetchTargetTerms", argument = 12 )
+    rtematres.api(task = "fetchSourceTerm", argument = 12)
+    rtematres.api(task = "fetchTerms", argument = '12,13' )
+    rtematres.api(task = "fetchRelatedTerms", argument = '12,13' )
+    rtematres.api(task = "fetchSimilar", argument = 12)
+    rtematres.api(task = "fetchLast")
+    rtematres.api.conversion.keyword_id(given = "Measurement")
+    rtematres.api.conversion.keyword_id(given = 8)
  }
 }
 
