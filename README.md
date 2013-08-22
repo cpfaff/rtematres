@@ -1,6 +1,6 @@
-# The R package for tematres 
+# The R package for tematres
 
-The `rtematres` package is an api package to exploit formal representations of knowledge 
+The `rtematres` package is an api package to exploit formal representations of knowledge
 hosted on any [tematres server](http://www.vocabularyserver.com/) instance.
 It gives you access to the base API functions and their documentation and offers convenient
 wrapper functions that ease the explotion of the vocabolary.
@@ -9,14 +9,14 @@ wrapper functions that ease the explotion of the vocabolary.
 
 #### From CRAN
 
-Find the package and manual on [CRAN](http://cran.r-project.org/web/packages/rtematres/index.html). You 
+Find the package and manual on [CRAN](http://cran.r-project.org/web/packages/rtematres/index.html). You
 can simply install the version hosted there issuing the command below:
 
 ```
 install.packages("rtematres")
 ```
 
-#### From github 
+#### From github
 
 The installation from Github requires the `devtools` package.
 
@@ -25,14 +25,14 @@ The installation from Github requires the `devtools` package.
 install.packages("devtools")
 # install rtematres:
 library(devtools)
-install_github(username = "cpfaff", repo = "rtematres")
+install_github(username = "cpfaff", repo = "rtematres", subdir = "rtematres")
 ```
 
 ### Usage
 
 #### Load the package
 
-After installation load the package: 
+After installation load the package:
 
 ```
 library(rtematres)
@@ -49,14 +49,14 @@ library(rtematres)
 `rtematres.options("tematres_url" = "http://url.to/your/tematres/server")`
 `rtematres.options("tematres_service_url" = "http://url.to/your/tematres/server/api")`
 
-Note: `tematres_url` is informative only atm but you need to set the url in `tematres_service_ur` 
+Note: `tematres_url` is informative only atm but you need to set the url in `tematres_service_ur`
 to the `services.php` of the tematres server. This is the the access to the api.
 
 ### Base API tasks
 
-Below you find the base api tasks. As you can see some of them only take ids of terms. As you 
-usually not know the id of a term as the term is what you are looking there are convenience 
-functions that will be introduce with version 0.2 (see below). 
+Below you find the base api tasks. As you can see some of them only take ids of terms. As you
+usually not know the id of a term as the term is what you are looking there are convenience
+functions that will be introduce with version 0.2 (see below).
 
 ```
 rtematres.api(task = "availableTasks")
@@ -90,7 +90,7 @@ also included in the `rtematres` package.
 rtematres.api.conversion.id_term(given = 20 )
 ```
 
-The option name is `given` as it also handles the reverse case. You can do the following to 
+The option name is `given` as it also handles the reverse case. You can do the following to
 get the id for a term:
 
 ```
@@ -138,9 +138,9 @@ rtematres.api.do(task = "fetchSimilar", term = "tree")
 rtematres.api.do(task = "fetchLast")
 ```
 
-## Other convenience functions 
+## Other convenience functions
 
-These will be remove in the next version of the package as the functions 
+These will be remove in the next version of the package as the functions
 above completely cover this stuff.
 
 ```
