@@ -52,69 +52,21 @@ library(rtematres)
 Note: `tematres_url` is informative only atm but you need to set the url in `tematres_service_ur`
 to the `services.php` of the tematres server. This is the the access to the api.
 
-### Base API tasks
 
-Below you find the base api tasks. As you can see some of them only take ids of terms. As you
-usually not know the id of a term as the term is what you are looking there are convenience
-functions that will be introduce with version 0.2 (see below).
+#### Exploit the knowledge
 
-```
-rtematres.api(task = "availableTasks")
-rtematres.api(task = "suggest", argument = "measurement")
-rtematres.api(task = "suggestDetails", argument = "measurement")
-rtematres.api(task = "fetchVocabularyData")
-rtematres.api(task = "fetchTopTerms")
-rtematres.api(task = "search", argument = "measurement")
-rtematres.api(task = "letter", argument = "t")
-rtematres.api(task = "fetchTerm", argument = 12)
-rtematres.api(task = "fetchDown", argument = 4 )
-rtematres.api(task = "fetchUp", argument = 4)
-rtematres.api(task = "fetchRelated", argument = 4)
-rtematres.api(task = "fetchAlt", argument = 12 )
-rtematres.api(task = "fetchCode", argument = "tree")
-rtematres.api(task = "fetchNotes", argument = 5 )
-rtematres.api(task = "fetchDirectTerms", argument = 12)
-rtematres.api(task = "fetchURI", argument = 12)
-rtematres.api(task = "fetchTargetTerms", argument = 12 )
-rtematres.api(task = "fetchSourceTerm", argument = 12)
-rtematres.api(task = "fetchTerms", argument = '12,13' )
-rtematres.api(task = "fetchRelatedTerms", argument = '12,13' )
-rtematres.api(task = "fetchSimilar", argument = 12)
-rtematres.api(task = "fetchLast")
-```
-
-If you like to use these functions you need to convert terms to ids manually using the helper
-also included in the `rtematres` package.
-
-```
-rtematres.api.conversion.id_term(given = 20 )
-```
-
-The option name is `given` as it also handles the reverse case. You can do the following to
-get the id for a term:
-
-```
-rtematres.api.conversion.id_term(given = "Contex")
-```
-
-This reverse case also has its own alias to the function. This feels semantically
-more native when writing and reading your codee.
-
-
-```
-rtematres.api.conversion.term_id(given = "Contex")
-```
-
-
-## Version 0.2
-
-Will offer more convenience but is not on CRAN yet.This functions take strings
-as input only for the tasks you like to perform on
-them. This makes it easier to exploit the vocabulary as you do not have to
-convert the term into an id in dorder to use the base api functions.
+You can get a list of tasks their descriptions and arguments they take using
+the command below.
 
 ```
 rtematres.api.do(task = "availableTasks")
+```
+
+To exploit the vocabulary you can issue one of the tasks in the list below. If
+the task takes multiple terms you need to concatenate the strings in R typical
+manner with `c("term one", "term two")`.
+
+```
 rtematres.api.do(task = "fetchVocabularyData")
 rtematres.api.do(task = "suggest", term = "measurement")
 rtematres.api.do(task = "suggestDetails", term = "measurement")
@@ -138,18 +90,22 @@ rtematres.api.do(task = "fetchSimilar", term = "tree")
 rtematres.api.do(task = "fetchLast")
 ```
 
-## Other convenience functions
-
-These will be remove in the next version of the package as the functions
-above completely cover this stuff.
+#### Helper
 
 ```
-rtematres.api.define(term = "Context")
-rtematres.api.search(term = "Location")
-rtematres.api.search(term = "Location", task="fetchUp")
-rtematres.api.search(term = "Location", task="fetchDown")
+rtematres.api.conversion.id_term(given = 20 )
 ```
 
+The option name is `given` as it also handles the reverse case. You can do the
+following to get the id for a term:
 
+```
+rtematres.api.conversion.id_term(given = "Contex")
+```
 
+This reverse case also has its own alias to the function. This feels semantically
+more native when writing and reading your codee.
 
+```
+rtematres.api.conversion.term_id(given = "Contex")
+```
