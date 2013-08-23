@@ -103,8 +103,8 @@ following to get the id for a term:
 rtematres.api.conversion.id_term(given = "Contex")
 ```
 
-This reverse case also has its own alias to the function. This feels semantically
-more native when writing and reading your codee.
+This reverse case also has its own alias to the function. This feels
+semantically more native when writing and reading code.
 
 ```
 rtematres.api.conversion.term_id(given = "Contex")
