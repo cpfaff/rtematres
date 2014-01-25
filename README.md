@@ -109,3 +109,7 @@ semantically more native when writing and reading code.
 ```
 rtematres.api.conversion.term_id(given = "Contex")
 ```
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/cpfaff/rtematres/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
