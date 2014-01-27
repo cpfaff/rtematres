@@ -2,7 +2,7 @@
 \alias{rtematres.api.search}
 \title{A tematres base api based function to search the server}
 \usage{
-  rtematres.api.search(term, task = "search")
+rtematres.api.search(term, task = "search")
 }
 \arguments{
   \item{term}{The term you are looking for}
@@ -13,11 +13,11 @@
   definitions).}
 }
 \value{
-  The function returns a vector of keywords
+The function returns a vector of keywords
 }
 \description{
-  Search a Tematres thesaurus via keywords. This function
-  is a wrapper and so it calls the appropriate funtions
-  depending on the search task.
+Search a Tematres thesaurus via keywords. This function is
+a wrapper and so it calls the appropriate funtions
+depending on the search task.
 }
 

@@ -1,7 +1,7 @@
+export(rtematres)
 export(rtematres.api)
 export(rtematres.api.conversion.term_id)
 export(rtematres.api.define)
-export(rtematres.api.do)
 export(rtematres.api.search)
 export(rtematres.options)
 import(RCurl)

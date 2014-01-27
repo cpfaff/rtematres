@@ -2,7 +2,7 @@
 \alias{rtematres.api}
 \title{Basic tematres server api}
 \usage{
-  rtematres.api(task = "availableTasks", argument)
+rtematres.api(task = "availableTasks", argument)
 }
 \arguments{
   \item{task}{The api task you like to execute. Use the the
@@ -15,11 +15,11 @@
   the task "availableTasks".}
 }
 \value{
-  The function returns either a dataframe for information
-  or a list of keywords and ids
+The function returns either a dataframe for information or
+a list of keywords and ids
 }
 \description{
-  Basic tematres server api
+Basic tematres server api
 }
 \examples{
 \dontrun{

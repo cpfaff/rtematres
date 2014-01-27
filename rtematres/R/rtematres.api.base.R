@@ -71,10 +71,8 @@ rtematres.api <- function(task = "availableTasks", argument) {
 
 	response = xmlTreeParse(service_url, useInternalNodes = T)
 
-
 	# scheme to use
-	base_list = list(id = "//term/term_id",
-		term = "//term/string")
+	base_list = list(term = "//term/string")
 
 	notes_list = list(id = "//term/term_id",
 		term = "//term/string",
@@ -88,6 +86,8 @@ rtematres.api <- function(task = "availableTasks", argument) {
 		lastMod = "//lastMod",
 		count_terms = "//cant_terms",
 		status = "//status")
+
+	directTerms_list = list(term = "//term/string", relation = "//term/relation_type")
 
 	suggest_list = list(term = "//result/term")
 
@@ -105,7 +105,7 @@ rtematres.api <- function(task = "availableTasks", argument) {
 				fetchUp = base_list,
 				fetchRelated = base_list,
 				fetchNotes = notes_list,
-				fetchDirectTerms = base_list,
+				fetchDirectTerms = directTerms_list,
 				fetchURI = base_list,
 				fetchTargetTerms = base_list,
 				fetchSourceTerms = base_list,

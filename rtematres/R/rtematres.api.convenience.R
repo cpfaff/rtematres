@@ -59,33 +59,33 @@ rtematres.api.search <- function(term, task="search") {
 #' @return The function returns either a dataframe for information or a list
 #'         of keywords and ids
 #' @examples \dontrun{
-#'     rtematres.api.do(task = "availableTasks")
-#'     rtematres.api.do(task = "fetchVocabularyData")
-#'     rtematres.api.do(task = "suggest", term = "measurement")
-#'     rtematres.api.do(task = "suggestDetails", term = "measurement")
-#'     rtematres.api.do(task = "fetchTopTerms")
-#'     rtematres.api.do(task = "search", term = "measurement")
-#'     rtematres.api.do(task = "letter", term = "t")
-#'     rtematres.api.do(task = "fetchTerm", term = "tree")
-#'     rtematres.api.do(task = "fetchTerms", term = c("Context", "tree") )
-#'     rtematres.api.do(task = "fetchDown", term = "Context")
-#'     rtematres.api.do(task = "fetchUp", term = "measurement")
-#'     rtematres.api.do(task = "fetchRelated", term = "tree")
-#'     rtematres.api.do(task = "fetchAlt", term = "tree" )
-#'     rtematres.api.do(task = "fetchCode", term = "tree")
-#'     rtematres.api.do(task = "fetchNotes", term = "Context")
-#'     rtematres.api.do(task = "fetchDirectTerms", term = "carbon")
-#'     rtematres.api.do(task = "fetchURI", term = "carbon")
-#'     rtematres.api.do(task = "fetchTargetTerms", term = "carbon")
-#'     rtematres.api.do(task = "fetchSourceTerm", term = "Context")
-#'     rtematres.api.do(task = "fetchRelatedTerms", term = c("Context", "tree"))
-#'     rtematres.api.do(task = "fetchSimilar", term = "tree")
-#'     rtematres.api.do(task = "fetchLast")
+#'     rtematres(task = "availableTasks")
+#'     rtematres(task = "fetchVocabularyData")
+#'     rtematres(task = "suggest", term = "measurement")
+#'     rtematres(task = "suggestDetails", term = "measurement")
+#'     rtematres(task = "fetchTopTerms")
+#'     rtematres(task = "search", term = "measurement")
+#'     rtematres(task = "letter", term = "t")
+#'     rtematres(task = "fetchTerm", term = "tree")
+#'     rtematres(task = "fetchTerms", term = c("Context", "tree") )
+#'     rtematres(task = "fetchDown", term = "Context")
+#'     rtematres(task = "fetchUp", term = "measurement")
+#'     rtematres(task = "fetchRelated", term = "tree")
+#'     rtematres(task = "fetchAlt", term = "tree" )
+#'     rtematres(task = "fetchCode", term = "tree")
+#'     rtematres(task = "fetchNotes", term = "Context")
+#'     rtematres(task = "fetchDirectTerms", term = "carbon")
+#'     rtematres(task = "fetchURI", term = "carbon")
+#'     rtematres(task = "fetchTargetTerms", term = "carbon")
+#'     rtematres(task = "fetchSourceTerm", term = "Context")
+#'     rtematres(task = "fetchRelatedTerms", term = c("Context", "tree"))
+#'     rtematres(task = "fetchSimilar", term = "tree")
+#'     rtematres(task = "fetchLast")
 #'   }
 #' @import plyr
-#' @export rtematres.api.do
+#' @export rtematres
 
-rtematres.api.do <- function(task = "availableTasks", term) {
+rtematres <- function(task = "availableTasks", term) {
   if (task == "availableTasks")
     {
       results = rtematres.api(task = "availableTasks")

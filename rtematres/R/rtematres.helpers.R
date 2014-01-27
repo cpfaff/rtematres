@@ -12,7 +12,7 @@ clean_html_string <- function(string) {
   return(cleaned_string)
 }
 
-# a wrapper function of xpathSApply. which will return NA instead of zero-lenght list when nodes not found
+# a wrapper function to xpathSApply. which will return NA instead of zero-lenght list when nodes not found
 xmlNodesValue <- function(doc, path){
   out = xpathSApply(doc, path, xmlValue, trim=T, ignoreComments=T)
   out = Filter(function(x) x!="", out)
