@@ -1,7 +1,8 @@
 # The R package for tematres
 
-
-
+```{r include = F, eval =T}
+require(rtematres)
+```
 
 The `rtematres` package is an api package to exploit vocabulary or formal 
 representations of knowledge on any [tematres server](http://www.vocabularyserver.com/)
@@ -127,66 +128,15 @@ This example uses the tematres server of the BEF-China project:
 
 * Display server and vocabulary information:
 
-
-```r
+```{r}
 rtematres.api(task = "fetchVocabularyData")
 ```
 
-```
-## $author
-## [1] "Claas-Thido Pfaff"
-## 
-## $title
-## [1] "BEFdata"
-## 
-## $language
-## [1] "en"
-## 
-## $uri
-## [1] "http://befdataproduction.biow.uni-leipzig.de/vocab/"
-## 
-## $contributor
-## [1] NA
-## 
-## $publisher
-## [1] NA
-## 
-## $rights
-## [1] NA
-## 
-## $creation_date
-## [1] "1998-01-01"
-## 
-## $last_modified
-## [1] "2013-08-11 18:24:04"
-## 
-## $count_terms
-## [1] "970"
-## 
-## $status
-## [1] "available"
-## 
-## $api_version
-## [1] "1.3"
-```
-
-
 * Find terms (partial matching)
 
-
-```r
+```{r}
 rtematres.api(task = "suggest", argument = "bio")
 ```
-
-```
-## $term
-##  [1] "biocoenosis"         "biocoenosis"         "biodiversity"       
-##  [4] "biocoenosis"         "biodiversity"        "biomass"            
-##  [7] "biomass allocation"  "biomass composition" "biome"              
-## [10] "biosphärenreservat"  "ecosphere"           "biocoenosis"        
-## [13] "bioturbation"
-```
-
 
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/cpfaff/rtematres/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
