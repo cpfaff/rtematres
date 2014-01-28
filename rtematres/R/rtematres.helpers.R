@@ -1,4 +1,5 @@
-# clean html strings
+# clean html strings 
+
 clean_html_string <- function(string) {
   remove_tags = gsub("<.*?>", "", string)
   remove_newlines = gsub("\\n"," ",remove_tags)

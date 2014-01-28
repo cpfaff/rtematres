@@ -1,5 +1,8 @@
 context("Test all base api tasks")
 
+# test_that("We are competible with API")
+# FIXME: Apis change so make the package work with a certain api version and warn if server and package might not be competible
+
 test_that("We can fetch the available tasks", {
 	expect_that(rtematres.api(task = "availableTasks"), is_a('data.frame'))
 })
@@ -59,12 +62,22 @@ test_that("We can fetch related terms for a id ", {
 	expect_that(names(rtematres.api(task = "fetchRelated", argument = 1)), equals('term'))	
 })
 
+# FIXME:
+# test_taht("We can fetch related terms for multiple ids")
 
-# rtematres.api(task = "fetchRelated", argument = 1)
+# NOTE: here the api is not very consistent as the name of the task is letter and the api field for
+# 	the task name says fetchSimilar
+test_that("We can fetch similar terms given a letter", {
+	expect_that(rtematres.api(task = "letter", argument = 'a'), is_a('list'))
+	# and
+	expect_that(names(rtematres.api(task = "letter", argument = 'a')), equals('term'))	
+})
+
+rtematres.api(task = "fetchVocabularyData", argument = 'a')
+
+
 
       # tasks_available                                                                     tasks_description                                    tasks_argument
-   # fetchRelatedTerms Retrieve simple related term data for some coma separated terms IDs (example: 3,6,98) some coma separated IDs (for example: arg=3,6,98)
-        # fetchSimilar                   Search and retrieve similar term for string search expresion ($arg)                 string (for example: arg=trrends)
     # fetchSourceTerms                Search and retrieve terms mapped in target vocabulary for a given term                                     term (string)
     # fetchTargetTerms   Search and retrieve data about target terms mapped via web services for one term_id                              one ID term_id (int)
            # fetchTerm                                                             Retrieve simple term data                                      one ID (int)

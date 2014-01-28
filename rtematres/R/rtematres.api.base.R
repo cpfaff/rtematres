@@ -83,9 +83,14 @@ rtematres.api <- function(task = "availableTasks", argument) {
 		title = "//title",
 		language = "//lang",
 		uri = "//uri",
-		lastMod = "//lastMod",
+		contributor = "//contributor",
+		publisher = "//publisher",
+		rights = "//rights",
+		creation_date = "//createDate",
+		last_modified = "//lastMod",
 		count_terms = "//cant_terms",
-		status = "//status")
+		status = "//status",
+		api_version = "//web_service_version")
 
 	directTerms_list = list(term = "//term/string", relation = "//term/relation_type")
 
