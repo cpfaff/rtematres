@@ -1,4 +1,7 @@
 #' Basic tematres server api
+#' 
+#' Features the basic tasks of the tematres server api. With no sugar added. 
+#' They are the basic building blocks for more convenient user functions.
 #'
 #' @param task The api task you like to execute. Use the the "availableTasks"
 #' 	  to get an overview about the base api. It returns a data frame with
@@ -41,7 +44,7 @@
 
 rtematres.api <- function(task = "availableTasks", argument) {
 	if(task == "availableTasks") {
-		base_service_url = getURL("tematres.befdata.biow.uni-leipzig.de/vocab/services.php")
+		base_service_url = getURL(rtematres.options("tematres_service_url"))
 		base_service_info = xmlTreeParse(base_service_url, useInternalNodes=T)
 		tasks_available = trim(xpathSApply(base_service_info, "//task", xmlValue)[-1])
 		tasks_description = trim(xpathSApply(base_service_info, "//action", xmlValue))
@@ -50,7 +53,7 @@ rtematres.api <- function(task = "availableTasks", argument) {
 	}
 
 	# select task
-	task = match.arg(task, c("fetchVocabularyData", "suggest", "suggestDetails", "fetchTopTerms", "search", "fetchCode", "letter", "fetchTerm", "fetchAlt", "fetchDown", "fetchUp", "fetchRelated", "fetchNotes", "fetchDirectTerms", "fetchURI", "fetchTargetTerms", "fetchSourceTerms", "fetchTerms", "fetchRelatedTerms", "letter", "fetchLast", "fetchSimilar"))
+	task = match.arg(task, c("fetchVocabularyData", "suggest", "suggestDetails", "fetchTopTerms", "search", "fetchCode", "letter", "fetchTerm", "fetchAlt", "fetchDown", "fetchUp", "fetchRelated", "fetchNotes", "fetchDirectTerms", "fetchURI", "fetchTargetTerms", "fetchSourceTerms", "fetchTerms", "fetchRelatedTerms", "fetchLast", "fetchSimilar"))
 
 	tasks_need_no_argument = c("fetchLast", "fetchTopTerms", "fetchVocabularyData")
 
@@ -92,33 +95,56 @@ rtematres.api <- function(task = "availableTasks", argument) {
 		status = "//status",
 		api_version = "//web_service_version")
 
+	fetchTerm_list = list(term = "//term/string", 
+			      language = "//term/lang",
+			      created_at = "//term/date_create",
+			      last_modified = "//term/date_mod")
+
+	fetchTerms_list = list(term = "//term/string", 
+			      language = "//term/lang",
+			      created_at = "//term/date_create",
+			      last_modified = "//term/date_mod")
+
+	fetchTopTerms_list = list(term = "//term/string", 
+			     language = "//term/lang")
+
 	directTerms_list = list(term = "//term/string", relation = "//term/relation_type")
 
-	suggest_list = list(term = "//result/term")
+	suggest_list = list(term = "//result/term") 
+
+	fetchDown_list = list(term = "//term/string",
+			      id = "//term/term_id",
+			      relation_type = "//term/relation_type",
+			      has_narrower_terms = "//term/hasMoreDown")
+	
+	fetchUp_list = list(term = "//term/string",
+			      id = "//term/term_id",
+			      order = "//term/order")
+
 
 	sheme = switch(task, fetchVocabularyData = fetchVocabularyData_list,
-				fetchTopTerms = base_list,
-				fetchCode = base_list,
-				search = base_list,
-				suggest = suggest_list,
-				suggestDetails = base_list,
-				letter = base_list,
-				fetchAlt = base_list,
-				fetchTerm = base_list,
-				fetchAlt = base_list,
-				fetchDown = base_list,
-				fetchUp = base_list,
-				fetchRelated = base_list,
-				fetchNotes = notes_list,
-				fetchDirectTerms = directTerms_list,
-				fetchURI = base_list,
-				fetchTargetTerms = base_list,
-				fetchSourceTerms = base_list,
-				fetchTerms = base_list,
-				fetchRelatedTerms = base_list,
-				fetchSimilar = base_list,
-				fetchLast = base_list
-				)
+		       fetchTopTerms = fetchTopTerms_list,
+		       fetchCode = base_list,
+		       search = base_list,
+		       suggest = suggest_list,
+		       suggestDetails = base_list,
+		       letter = base_list,
+		       fetchAlt = base_list,
+		       fetchTerm = fetchTerm_list,
+		       fetchAlt = base_list,
+		       fetchDown = fetchDown_list,
+		       fetchUp = fetchUp_list,
+		       fetchRelated = base_list,
+		       fetchNotes = notes_list,
+		       fetchDirectTerms = directTerms_list,
+		       fetchURI = base_list,
+		       fetchTargetTerms = base_list,
+		       fetchSourceTerms = base_list,
+		       fetchTerms = fetchTerms_list,
+		       fetchRelatedTerms = base_list,
+		       fetchSimilar = base_list,
+		       fetchLast = base_list
+		       )
 	if(is.list(sheme)) {
 	  rapply(sheme, function(x) xmlNodesValue(path=x, doc=response), how="replace")
 	} else {
