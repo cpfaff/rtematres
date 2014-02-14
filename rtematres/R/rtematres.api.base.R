@@ -53,7 +53,7 @@ rtematres.api <- function(task = "availableTasks", argument) {
 	}
 
 	# select task
-	task = match.arg(task, c("fetchVocabularyData", "suggest", "suggestDetails", "fetchTopTerms", "search", "fetchCode", "letter", "fetchTerm", "fetchAlt", "fetchDown", "fetchUp", "fetchRelated", "fetchNotes", "fetchDirectTerms", "fetchURI", "fetchTargetTerms", "fetchSourceTerms", "fetchTerms", "fetchRelatedTerms", "fetchLast", "fetchSimilar"))
+	task = match.arg(task, c("fetchVocabularyData", "suggest", "suggestDetails", "fetchTopTerms", "search", "searchNotes", "fetchCode", "letter", "fetchTerm", "fetchAlt", "fetchDown", "fetchUp", "fetchRelated", "fetchNotes", "fetchDirectTerms", "fetchURI", "fetchTargetTerms", "fetchSourceTerms", "fetchTerms", "fetchRelatedTerms", "fetchLast", "fetchSimilar"))
 
 	tasks_need_no_argument = c("fetchLast", "fetchTopTerms", "fetchVocabularyData")
 
@@ -76,9 +76,14 @@ rtematres.api <- function(task = "availableTasks", argument) {
 
 	# scheme to use
 	base_list = list(term = "//term/string")
+	
+	fetch_similar_list = list(term = "//result/term/string", 
+			   id = "//result/term/term_id")
 
-	notes_list = list(id = "//term/term_id",
-		term = "//term/string",
+	search_list = list(term = "//term/string", 
+			   id = "//term/term_id")
+
+	notes_list = list(term = "//term/string", 
 		language = "//term/note_lang",
 		description = "//term/note_text")
 
@@ -113,19 +118,18 @@ rtematres.api <- function(task = "availableTasks", argument) {
 	suggest_list = list(term = "//result/term") 
 
 	fetchDown_list = list(term = "//term/string",
-			      id = "//term/term_id",
 			      relation_type = "//term/relation_type",
 			      has_narrower_terms = "//term/hasMoreDown")
 	
 	fetchUp_list = list(term = "//term/string",
-			      id = "//term/term_id",
-			      order = "//term/order")
+			    order = "//term/order")
 
 
 	sheme = switch(task, fetchVocabularyData = fetchVocabularyData_list,
 		       fetchTopTerms = fetchTopTerms_list,
 		       fetchCode = base_list,
-		       search = base_list,
+		       search = search_list,
+		       searchNotes = search_list,
 		       suggest = suggest_list,
 		       suggestDetails = base_list,
 		       letter = base_list,
@@ -142,7 +146,7 @@ rtematres.api <- function(task = "availableTasks", argument) {
 		       fetchSourceTerms = base_list,
 		       fetchTerms = fetchTerms_list,
 		       fetchRelatedTerms = base_list,
-		       fetchSimilar = base_list,
+		       fetchSimilar = fetch_similar_list,
 		       fetchLast = base_list
 		       )
 	if(is.list(sheme)) {

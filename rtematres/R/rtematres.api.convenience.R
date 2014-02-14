@@ -33,13 +33,13 @@ rtematres.api.search <- function(term, task="search") {
       results=rtematres.api(task = "search", argument = term)
       return(results)
     }
-  if (task=="fetchUp")
+  if (task=="broaden")
     {
       id = rtematres.api.conversion.term_id(term, warn = F)
       results = rtematres.api(task = "fetchUp", argument = id)
       return(results)
     }
-  if (task=="fetchDown")
+  if (task=="narrow")
     {
       id = rtematres.api.conversion.term_id(term, warn = F)
       results = rtematres.api(task = "fetchDown", argument = id)
@@ -56,6 +56,8 @@ rtematres.api.search <- function(term, task="search") {
 #' 	  to get an overview about the base api. It returns a data frame with
 #'        descriptions and the arguments for the tasks.
 #' @param term Is the term(s) you like to execute the task for.
+#' @param verbose Either true of false and determines the ammount of info
+#'        that is returned by a query. 
 #' @return The function returns either a dataframe for information or a list
 #'         of keywords and ids
 #' @examples \dontrun{
@@ -85,61 +87,78 @@ rtematres.api.search <- function(term, task="search") {
 #' @import plyr
 #' @export rtematres
 
-rtematres <- function(task = "availableTasks", term) {
-  if (task == "availableTasks")
-    {
-      results = rtematres.api(task = "availableTasks")
-      results = arrange(results,(results$tasks_available))
-      return(results)
-    }
+rtematres <- function(task = "availableTasks", verbose=F, term) {
   if (task == "search")
     {
       results = rtematres.api(task = "search", argument = term)
-      return(results)
+      if(verbose) {
+	return(results)
+      } else {
+	return(results$term)
+      }
     }
-  if (task=="fetchUp")
+  if (task=="broaden")
     {
       id = rtematres.api.conversion.term_id(term, warn = F)
       results = rtematres.api(task = "fetchUp", argument = id)
-      return(results)
+      if(verbose) {
+	return(results)
+      } else {
+	return(results$term)
+      }
     }
-  if (task=="fetchDown")
+  if (task=="narrow")
     {
       id = rtematres.api.conversion.term_id(term, warn = F)
       results = rtematres.api(task = "fetchDown", argument = id)
-      return(results)
+      if(verbose) {
+	return(results)
+      } else {
+	return(results$term)
+      }
     }
+  if (task == "define")
+    {
+      id = rtematres.api.conversion.term_id(term, warn = F)
+      results = rtematres.api(task = "fetchNotes", argument = id)
+      results$description = clean_html_string(results$description)
+      if(verbose) {
+	editing = rtematres.api(task = "fetchTerm", argument = id)
+	results$created_at = editing$created_at
+	results$last_modified = editing$last_modified 
+
+
+	return(results)
+      } else {
+	return(results$description)
+      }
+    }
+
   if (task == "fetchTerm")
     {
       id = rtematres.api.conversion.term_id(term, warn = F)
-      results = rtematres.api(task = "fetchTerm", argument = id)
       return(results)
     }
-  if (task == "fetchTerms")
-    {
-      id = paste(sapply(term, function(x) rtematres.api.conversion.term_id(x, warn = F), USE.NAMES = F), collapse = ",")
-      results = rtematres.api(task = "fetchTerms", argument = id)
-      return(results)
-    }
+  # if (task == "fetchTerms")
+    # {
+      # id = paste(sapply(term, function(x) rtematres.api.conversion.term_id(x, warn = F), USE.NAMES = F), collapse = ",")
+      # results = rtematres.api(task = "fetchTerms", argument = id)
+      # return(results)
+    # }
   if (task == "fetchRelated")
     {
       id = rtematres.api.conversion.term_id(term, warn = F)
       results = rtematres.api(task = "fetchRelated", argument = id)
       return(results)
     }
-  if (task == "fetchAlt")
+  if (task == "related")
     {
       id = rtematres.api.conversion.term_id(term, warn = F)
-      results = rtematres.api(task = "fetchAlt", argument = id)
+      results = list(results_alternative = rtematres.api(task = "fetchAlt", argument = id),
+      results_direct_relations = rtematres.api(task = "fetchDirectTerms", argument = id))
       return(results)
     }
-  if (task == "fetchNotes")
-    {
-      id = rtematres.api.conversion.term_id(term, warn = F)
-      results = rtematres.api(task = "fetchNotes", argument = id)
-      results$description = clean_html_string(results$description)
-      return(results)
-    }
+
   if (task == "fetchDirectTerms")
     {
       id = rtematres.api.conversion.term_id(term, warn = F)

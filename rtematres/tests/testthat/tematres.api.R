@@ -10,7 +10,7 @@ test_that("We can fetch the available tasks", {
 test_that("We can fetch information about the vocabulary", {
 	expect_that(rtematres.api(task = "fetchVocabularyData"), is_a('list')) 
 	# and
-	expect_that(names(rtematres.api(task = "fetchVocabularyData")), equals(c("author", "title", "language", "uri", "lastMod", "count_terms", "status")))
+	expect_that(names(rtematres.api(task = "fetchVocabularyData")), equals(c("author", "title", "language", "uri", "contributor", "publisher", "rights", "creation_date", "last_modified", "count_terms", "status", "api_version")))
 })
 
 test_that("We can fetch a list of last modified terms", {
@@ -62,7 +62,7 @@ test_that("We can fetch related terms for a id ", {
 })
 
 # FIXME:
-# test_taht("We can fetch related terms for multiple ids")
+# test_that("We can fetch related terms for multiple ids")
 
 # NOTE: here the api is not very consistent as the name of the task is letter and the api field for
 # 	the task name says fetchSimilar
@@ -98,7 +98,6 @@ test_that("We can retrieve top terms", {
 	  expect_that(names(rtematres.api(task = "fetchTopTerms")), equals(c('term', 'language')))	
 })
 
-load_all("rtematres")
 # rtematres.api.conversion.term_id(given = "concept")
 
       # tasks_available                                                                     tasks_description                                    tasks_argument
