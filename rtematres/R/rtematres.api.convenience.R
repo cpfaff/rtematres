@@ -87,36 +87,36 @@ rtematres.api.search <- function(term, task="search") {
 #' @import plyr
 #' @export rtematres
 
-rtematres <- function(task = "availableTasks", verbose=F, term) {
+rtematres <- function(task, verbose=F, term, includenotes=F) {
   if (task == "search")
-    {
-      results = rtematres.api(task = "search", argument = term)
-      if(verbose) {
-	return(results)
-      } else {
-	return(results$term)
-      }
+  {
+    if(nchar(term) < 2) {
+      search = rtematres.api(task = "letter", argument = term)
+    } else {
+      search = rtematres.api(task = "search", argument = term)
     }
+    results = search
+    if(includenotes){
+      notes = rtematres.api(task = "searchNotes", argument = term)
+      results$term = unique(c(search$term, notes$term))
+    }
+    return(results$term)
+  }
+
   if (task=="broaden")
     {
       id = rtematres.api.conversion.term_id(term, warn = F)
       results = rtematres.api(task = "fetchUp", argument = id)
-      if(verbose) {
-	return(results)
-      } else {
-	return(results$term)
-      }
+      return(results$term)
     }
+
   if (task=="narrow")
     {
       id = rtematres.api.conversion.term_id(term, warn = F)
       results = rtematres.api(task = "fetchDown", argument = id)
-      if(verbose) {
-	return(results)
-      } else {
-	return(results$term)
-      }
+      return(results$term)
     }
+
   if (task == "define")
     {
       id = rtematres.api.conversion.term_id(term, warn = F)
@@ -127,12 +127,25 @@ rtematres <- function(task = "availableTasks", verbose=F, term) {
 	results$created_at = editing$created_at
 	results$last_modified = editing$last_modified 
 
-
 	return(results)
       } else {
 	return(results$description)
       }
     }
+
+  if (task == "definerelation") {
+    id = rtematres.api.conversion.term_id(term, warn = F)
+    directly = rtematres.api(task = "fetchDirectTerms", argument = id) # fetch all relations directly connected
+    sources = rtematres.api(task = "fetchSourceTerms", argument = id) # fetch all relations directly connected
+    targets = rtematres.api(task = "fetchTargetTerms", argument = id) # from source to target
+    down = rtematres.api(task = "fetchDown", argument = id)$term
+    up = rtematres.api(task = "fetchUp", argument = id)$term
+    related = rtematres.api(task = "fetchRelated", argument = id)
+    results = list(directly, sources, targets, down, up, related)
+    return(results)
+  }
+
+  # old ones 
 
   if (task == "fetchTerm")
     {
