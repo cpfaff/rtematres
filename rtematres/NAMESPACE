@@ -1,3 +1,4 @@
+export(annotate.dataframe)
 export(check_api_version)
 export(rtematres)
 export(rtematres.api)

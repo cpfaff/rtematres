@@ -1,6 +1,8 @@
 # The R package for tematres
 
 ```{r include = F, eval =T}
+require(devtools)
+install_github(username = "cpfaff", repo = "rtematres", subdir = "rtematres") 
 require(rtematres)
 ```
 
@@ -65,64 +67,58 @@ Note: `tematres_url` is informative only atm but you need to set the url in `tem
 to the `services.php` of the tematres server. This is the the access to the api.
 
 
-#### Exploit the knowledge
+#### Exploit the vocabulary 
 
-You can get a list of tasks their descriptions and arguments they take using
-the command below.
+You have access to a few convenient functions to exploit the vocabulary hosted
+on your tematres vocabulary server.
 
+* search
+
+Search for terms by name. You can also include the notes in your search. This
+will provide you with terms mentioning the search term in their definition.  If
+you search for one letter it will list all terms that begin with the letter.
+
+```{r}
+rtematres(task = "search", term = "plant")
 ```
-rtematres.api.do(task = "availableTasks")
+
+```{r}
+rtematres(task = "search", term = "plant organ", includenotes = T)
 ```
 
-To exploit the vocabulary you can issue one of the tasks in the list below. If
-the task takes multiple terms you need to concatenate the strings in R typical
-manner with `c("term one", "term two")`.
-
+```{r}
+rtematres(task = "search", term = "p")
 ```
-rtematres.api.do(task = "fetchVocabularyData")
-rtematres.api.do(task = "suggest", term = "measurement")
-rtematres.api.do(task = "suggestDetails", term = "measurement")
-rtematres.api.do(task = "fetchTopTerms")
-rtematres.api.do(task = "search", term = "measurement")
-rtematres.api.do(task = "letter", term = "t")
-rtematres.api.do(task = "fetchTerm", term = "tree")
-rtematres.api.do(task = "fetchTerms", term = c("Context", "tree") )
-rtematres.api.do(task = "fetchDown", term = "Context")
-rtematres.api.do(task = "fetchUp", term = "measurement")
-rtematres.api.do(task = "fetchRelated", term = "tree")
-rtematres.api.do(task = "fetchAlt", term = "tree" )
-rtematres.api.do(task = "fetchCode", term = "tree")
-rtematres.api.do(task = "fetchNotes", term = "Context")
-rtematres.api.do(task = "fetchDirectTerms", term = "carbon")
-rtematres.api.do(task = "fetchURI", term = "carbon")
-rtematres.api.do(task = "fetchTargetTerms", term = "carbon")
-rtematres.api.do(task = "fetchSourceTerm", term = "Context")
-rtematres.api.do(task = "fetchRelatedTerms", term = c("Context", "tree"))
-rtematres.api.do(task = "fetchSimilar", term = "tree")
-rtematres.api.do(task = "fetchLast")
+
+* define
+
+Fetches definitions from definition notes of a concept in your thesaurus.
+
+```{r}
+rtematres(task = "define", term = "plant organ")
+```
+
+* broaden/narrow
+
+Fetches broader or narrower terms for a term you provide
+
+```{r}
+rtematres(task = "broaden", term = "plant organ")
+```
+
+```{r}
+rtematres(task = "narrow", term = "plant organ")
 ```
 
 #### Helper
 
-```
-rtematres.api.conversion.id_term(given = 20 )
+* convert a term to the index id of your term in your thesaurus
+
+```{r}
+rtematres.api.conversion.term_id(given = "plant organ")
 ```
 
-The option name is `given` as it also handles the reverse case. You can do the
-following to get the id for a term:
-
-```
-rtematres.api.conversion.id_term(given = "Contex")
-```
-
-This reverse case also has its own alias to the function. This feels
-semantically more native when writing and reading code.
-
-```
-rtematres.api.conversion.term_id(given = "Contex")
-```
-
-## Examples
+## Get information 
 
 This example uses the tematres server of the BEF-China project:
 
@@ -132,11 +128,18 @@ This example uses the tematres server of the BEF-China project:
 rtematres.api(task = "fetchVocabularyData")
 ```
 
-* Find terms (partial matching)
+## Annotate data frames
+
+* Example 
 
 ```{r}
-rtematres.api(task = "suggest", argument = "bio")
+tree <- c(1,2,3,4,5,6,7,8, 9)                        
+plantorgan <- c("branch","flower","fruit","inflorescence", "leaf","seed", "twig", "branch", "leaf")                        
+species <- c("acer platanum","fagus sylvatica","betula pendula","acer platanum", "fagus sylvatica","fagus sylvatica", "fagus sylvatica", "Viburnum sempervirens", "lala pubescens")                        
+myframe <- data.frame(tree = tree, "plant organ" = plantorgan, "species names" = species)
+annotate.dataframe(myframe)
 ```
+
 
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/cpfaff/rtematres/trend.png)](https://bitdeli.com/free "Bitdeli Badge")

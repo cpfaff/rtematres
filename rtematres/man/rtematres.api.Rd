@@ -19,7 +19,9 @@ The function returns either a dataframe for information or
 a list of keywords and ids
 }
 \description{
-Basic tematres server api
+Features the basic tasks of the tematres server api. With
+no sugar added. They are the basic building blocks for more
+convenient user functions.
 }
 \examples{
 \dontrun{

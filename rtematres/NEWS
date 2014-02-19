@@ -1,3 +1,15 @@
+rtematres 0.3
+==================
+
+* introduces new smarter interface for search 
+  - now embraces character search, default search, and search in notes
+
+* introduces new annotation features. 
+  - These allow to find common concepts for contents in data frames
+  - It searches for the terms on tematres and makes a guess whats in 
+    your columns. It returns a annotation metadata object that can be used 
+    to start build up more sophisticated metadata automatically later on.
+
 rtematres 0.2
 ==================
 

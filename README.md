@@ -64,64 +64,208 @@ Note: `tematres_url` is informative only atm but you need to set the url in `tem
 to the `services.php` of the tematres server. This is the the access to the api.
 
 
-#### Exploit the knowledge
+#### Exploit the vocabulary 
 
-You can get a list of tasks their descriptions and arguments they take using
-the command below.
+You have access to a few convenient functions to exploit the vocabulary hosted
+on your tematres vocabulary server.
+
+* search
+
+Search for terms by name. You can also include the notes in your search. This
+will provide you with terms mentioning the search term in their definition.  If
+you search for one letter it will list all terms that begin with the letter.
+
+
+```r
+rtematres(task = "search", term = "plant")
+```
 
 ```
-rtematres.api.do(task = "availableTasks")
+##  [1] "plant"                                        
+##  [2] "herbal plant species abundance in late summer"
+##  [3] "host plant finding"                           
+##  [4] "perennial plant"                              
+##  [5] "plant determination"                          
+##  [6] "plant diversity"                              
+##  [7] "plant growth"                                 
+##  [8] "plant growth state"                           
+##  [9] "plant insect interaction"                     
+## [10] "plant nursery"                                
+## [11] "plant organ"                                  
+## [12] "plant part"                                   
+## [13] "plant pollinator interaction"                 
+## [14] "plant population"                             
+## [15] "plant position"                               
+## [16] "plant related characteristics"                
+## [17] "plant secretion"                              
+## [18] "plant species abundance"                      
+## [19] "plant species name"                           
+## [20] "plant species occurrence"                     
+## [21] "plant-soil interaction"                       
+## [22] "plantago lanceolata"                          
+## [23] "vascular plant"
 ```
 
-To exploit the vocabulary you can issue one of the tasks in the list below. If
-the task takes multiple terms you need to concatenate the strings in R typical
-manner with `c("term one", "term two")`.
+
+
+```r
+rtematres(task = "search", term = "plant organ", includenotes = T)
+```
 
 ```
-rtematres.api.do(task = "fetchVocabularyData")
-rtematres.api.do(task = "suggest", term = "measurement")
-rtematres.api.do(task = "suggestDetails", term = "measurement")
-rtematres.api.do(task = "fetchTopTerms")
-rtematres.api.do(task = "search", term = "measurement")
-rtematres.api.do(task = "letter", term = "t")
-rtematres.api.do(task = "fetchTerm", term = "tree")
-rtematres.api.do(task = "fetchTerms", term = c("Context", "tree") )
-rtematres.api.do(task = "fetchDown", term = "Context")
-rtematres.api.do(task = "fetchUp", term = "measurement")
-rtematres.api.do(task = "fetchRelated", term = "tree")
-rtematres.api.do(task = "fetchAlt", term = "tree" )
-rtematres.api.do(task = "fetchCode", term = "tree")
-rtematres.api.do(task = "fetchNotes", term = "Context")
-rtematres.api.do(task = "fetchDirectTerms", term = "carbon")
-rtematres.api.do(task = "fetchURI", term = "carbon")
-rtematres.api.do(task = "fetchTargetTerms", term = "carbon")
-rtematres.api.do(task = "fetchSourceTerm", term = "Context")
-rtematres.api.do(task = "fetchRelatedTerms", term = c("Context", "tree"))
-rtematres.api.do(task = "fetchSimilar", term = "tree")
-rtematres.api.do(task = "fetchLast")
+## [1] "plant organ"   "crown"         "litter"        "plant nursery"
 ```
+
+
+
+```r
+rtematres(task = "search", term = "p")
+```
+
+```
+##  [1] "p fraction"                        
+##  [2] "P: biotop"                         
+##  [3] "P: ecoregion"                      
+##  [4] "P: habitat"                        
+##  [5] "P: subplots"                       
+##  [6] "parasite"                          
+##  [7] "parasitical"                       
+##  [8] "parasitism"                        
+##  [9] "parasitoid abundance"              
+## [10] "parasitoids olfactory orientation" 
+## [11] "parent"                            
+## [12] "pastures"                          
+## [13] "pathogen"                          
+## [14] "pcr"                               
+## [15] "peat"                              
+## [16] "pellet counting"                   
+## [17] "pellet decay"                      
+## [18] "perennial plant"                   
+## [19] "performance"                       
+## [20] "peroxidase"                        
+## [21] "pH"                                
+## [22] "phase or state of matter"          
+## [23] "phenology"                         
+## [24] "phosphate"                         
+## [25] "phosphorous"                       
+## [26] "photosynthetic performance"        
+## [27] "phyllosphere"                      
+## [28] "phylogenetic distinctness"         
+## [29] "phylogenetic diversity"            
+## [30] "phytometer"                        
+## [31] "phytosymbiosis"                    
+## [32] "pine"                              
+## [33] "planar curvature"                  
+## [34] "plant"                             
+## [35] "plant determination"               
+## [36] "plant diversity"                   
+## [37] "plant growth"                      
+## [38] "plant growth state"                
+## [39] "plant insect interaction"          
+## [40] "plant nursery"                     
+## [41] "plant organ"                       
+## [42] "plant part"                        
+## [43] "plant pollinator interaction"      
+## [44] "plant population"                  
+## [45] "plant position"                    
+## [46] "plant related characteristics"     
+## [47] "plant secretion"                   
+## [48] "plant species abundance"           
+## [49] "plant species name"                
+## [50] "plant species occurrence"          
+## [51] "plant-soil interaction"            
+## [52] "plantago lanceolata"               
+## [53] "plot"                              
+## [54] "plot charts"                       
+## [55] "po4"                               
+## [56] "pollen"                            
+## [57] "pollination"                       
+## [58] "polygon"                           
+## [59] "polymorphic nuclear microsatellite"
+## [60] "polyphenols"                       
+## [61] "population"                        
+## [62] "population genetics"               
+## [63] "pore volume"                       
+## [64] "porosity"                          
+## [65] "position"                          
+## [66] "potassium"                         
+## [67] "powdery mildew"                    
+## [68] "precipitation"                     
+## [69] "precision"                         
+## [70] "predation"                         
+## [71] "predation"                         
+## [72] "predator abundance"                
+## [73] "predator diversity"                
+## [74] "predator-prey interactions"        
+## [75] "predatoric"                        
+## [76] "present"                           
+## [77] "primary metabolites"               
+## [78] "principal component analysis"      
+## [79] "process"                           
+## [80] "productivity"                      
+## [81] "profile curvature"                 
+## [82] "prokaryotes"                       
+## [83] "protein"                           
+## [84] "protist"                           
+## [85] "protist diversity"                 
+## [86] "pyrosequencing"
+```
+
+
+* define
+
+Fetches definitions from definition notes of a concept in your thesaurus.
+
+
+```r
+rtematres(task = "define", term = "plant organ")
+```
+
+```
+## [1] "plant organ - a functional and structural unit of a plant"
+```
+
+
+* broaden/narrow
+
+Fetches broader or narrower terms for a term you provide
+
+
+```r
+rtematres(task = "broaden", term = "plant organ")
+```
+
+```
+## [1] "entity"      "eukaryotes"  "plant"       "plant part"  "plant organ"
+```
+
+
+
+```r
+rtematres(task = "narrow", term = "plant organ")
+```
+
+```
+## [1] "branch"        "flower"        "fruit"         "inflorescence"
+## [5] "leaf"          "seed"          "twig"
+```
+
 
 #### Helper
 
-```
-rtematres.api.conversion.id_term(given = 20 )
+* convert a term to the index id of your term in your thesaurus
+
+
+```r
+rtematres.api.conversion.term_id(given = "plant organ")
 ```
 
-The option name is `given` as it also handles the reverse case. You can do the
-following to get the id for a term:
-
 ```
-rtematres.api.conversion.id_term(given = "Contex")
+## [1] "446"
 ```
 
-This reverse case also has its own alias to the function. This feels
-semantically more native when writing and reading code.
 
-```
-rtematres.api.conversion.term_id(given = "Contex")
-```
-
-## Examples
+## Get information 
 
 This example uses the tematres server of the BEF-China project:
 
@@ -158,10 +302,10 @@ rtematres.api(task = "fetchVocabularyData")
 ## [1] "1998-01-01"
 ## 
 ## $last_modified
-## [1] "2013-08-11 18:24:04"
+## [1] "2014-02-06 09:30:07"
 ## 
 ## $count_terms
-## [1] "970"
+## [1] "981"
 ## 
 ## $status
 ## [1] "available"
@@ -171,21 +315,33 @@ rtematres.api(task = "fetchVocabularyData")
 ```
 
 
-* Find terms (partial matching)
+## Annotate data frames
+
+* Example 
 
 
 ```r
-rtematres.api(task = "suggest", argument = "bio")
+tree <- c(1, 2, 3, 4, 5, 6, 7, 8, 9)
+plantorgan <- c("branch", "flower", "fruit", "inflorescence", "leaf", "seed", 
+    "twig", "branch", "leaf")
+species <- c("acer platanum", "fagus sylvatica", "betula pendula", "acer platanum", 
+    "fagus sylvatica", "fagus sylvatica", "fagus sylvatica", "Viburnum sempervirens", 
+    "lala pubescens")
+myframe <- data.frame(tree = tree, `plant organ` = plantorgan, `species names` = species)
+annotate.dataframe(myframe)
 ```
 
 ```
-## $term
-##  [1] "biocoenosis"         "biocoenosis"         "biodiversity"       
-##  [4] "biocoenosis"         "biodiversity"        "biomass"            
-##  [7] "biomass allocation"  "biomass composition" "biome"              
-## [10] "biosphärenreservat"  "ecosphere"           "biocoenosis"        
-## [13] "bioturbation"
+##               class     concecpts           
+## tree          "numeric" "NA"                
+## plant.organ   "factor"  "plant organ"       
+## species.names "factor"  "plant species name"
+##               definitions                                                
+## tree          "NA"                                                       
+## plant.organ   "plant organ - a functional and structural unit of a plant"
+## species.names "NA"
 ```
+
 
 
 

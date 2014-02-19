@@ -4,7 +4,7 @@
 \alias{rtematres-package}
 \title{rtematres A package to exploit controlled vocabularies from tematres servers}
 \usage{
-rtematres(task = "availableTasks", term)
+rtematres(task, verbose = F, term, includenotes = F)
 }
 \arguments{
   \item{task}{The api task you like to execute. Use the the
@@ -14,6 +14,9 @@ rtematres(task = "availableTasks", term)
 
   \item{term}{Is the term(s) you like to execute the task
   for.}
+
+  \item{verbose}{Either true of false and determines the
+  ammount of info that is returned by a query.}
 }
 \value{
 The function returns either a dataframe for information or
