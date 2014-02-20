@@ -223,7 +223,7 @@ rtematres(task = "define", term = "plant organ")
 ```
 
 ```
-## [1] NA
+## [1] "plant organ - a functional and structural unit of a plant"
 ```
 
 
@@ -237,7 +237,7 @@ rtematres(task = "broaden", term = "plant organ")
 ```
 
 ```
-## [1] NA
+## [1] "entity"      "eukaryotes"  "plant"       "plant part"  "plant organ"
 ```
 
 
@@ -247,7 +247,8 @@ rtematres(task = "narrow", term = "plant organ")
 ```
 
 ```
-## [1] NA
+## [1] "branch"        "flower"        "fruit"         "inflorescence"
+## [5] "leaf"          "seed"          "twig"
 ```
 
 
@@ -261,7 +262,7 @@ rtematres.api.conversion.term_id(given = "plant organ")
 ```
 
 ```
-## [1] NA
+## Error: could not find function "rtematres.api.conversion.term_id"
 ```
 
 
@@ -332,14 +333,22 @@ annotate.dataframe(myframe)
 ```
 
 ```
-##               column_classes concepts_body definitions_body
-## tree          "numeric"      NA            "NA"            
-## plant.organ   "factor"       NA            "NA"            
-## species.names "factor"       NA            "NA"            
-##               concepts_header definitions_header
-## tree          NA              "NA"              
-## plant.organ   NA              "NA"              
-## species.names NA              "NA"
+##               column_classes concepts_body       
+## tree          "numeric"      "NA"                
+## plant.organ   "factor"       "plant organ"       
+## species.names "factor"       "plant species name"
+##               definitions_body                                           
+## tree          "NA"                                                       
+## plant.organ   "plant organ - a functional and structural unit of a plant"
+## species.names "NA"                                                       
+##               concepts_header
+## tree          "entity"       
+## plant.organ   "entity"       
+## species.names "NA"           
+##               definitions_header                                                                                               
+## tree          "In botany, a tree is a perennial plant with an elongated stem, or trunk, supporting leaves or branc" [truncated]
+## plant.organ   "NA"                                                                                                             
+## species.names "NA"
 ```
 
 

@@ -2,6 +2,7 @@
 
 ```{r include = F, eval =T}
 require(devtools)
+remove.packages("rtematres")
 install_github(username = "cpfaff", repo = "rtematres", subdir = "rtematres") 
 require(rtematres)
 ```
