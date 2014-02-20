@@ -14,12 +14,12 @@ rtematres.api.conversion.term_id <- rtematres.api.conversion.id_term <- function
 	if(is.character(given)) {
 		response = rtematres.api(task = "search", argument = given)
 		the_id_is = response$id[which(response$term == given)]
-		if(length(the_id_is) == 0 && warn) warning("Sorry no such term available!") else return(NA)
+		if(length(the_id_is) == 0 && warn) warning("Sorry no such term available!")
 		return(the_id_is)
 	} else {
 		response = rtematres.api(task = "fetchTerm", argument = given)
 		the_term_is = response$term[which(response$id == given)]
-		if(length(the_term_is) == 0 && warn) warning("Sorry no such id available!") else return(NA)
+		if(length(the_term_is) == 0 && warn) warning("Sorry no such id available!")
 		return(the_term_is)
 	}
 } 
