@@ -10,17 +10,18 @@
 #'
 #' @return Either a string or id
 #' @export
+#' @alias rtematres.api.conversion.term_id rtematres.api.conversion.id_term
 
 rtematres.api.conversion.term_id <- rtematres.api.conversion.id_term <- function(given, warn = T) {
 	if(is.character(given)) {
 		response = rtematres.api(task = "search", argument = given)
 		the_id_is = response$id[which(response$term == given)]
-		if(length(the_id_is) == 0 && warn) warning("Sorry no such term available!")
+		if(length(the_id_is) == 0 && warn) warning("Sorry no such term available!") else return(NA)
 		return(the_id_is)
 	} else {
 		response = rtematres.api(task = "fetchTerm", argument = given)
 		the_term_is = response$term[which(response$id == given)]
-		if(length(the_term_is) == 0 && warn) warning("Sorry no such id available!")
+		if(length(the_term_is) == 0 && warn) warning("Sorry no such id available!") else return(NA)
 		return(the_term_is)
 	}
 } 

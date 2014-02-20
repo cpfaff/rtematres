@@ -3,10 +3,10 @@
 #' You can semantically annotate datasets base on a tematres 
 #' thesaurus. 
 
-content.find.common.concept <- function(input, showbroader = F) {
+content.find.concept <- function(input, showbroader = F) {
    # handles data frame in a loop
    if(class(input) %in% c("list", "data.frame")) {
-      return(sapply(input, function(x) content.find.common.concept(x)))
+      return(sapply(input, function(x) content.find.concept(x)))
    }
 
    # as we do not handle numeric content return NA 
@@ -52,18 +52,24 @@ header.find.concept <- function(input) {
    if(!is.character(input)) {
       input = as.character(input) 
    }
+   input = tolower(input)
+   input = cleanstrings(input)
    broader_terms = lapply(input, function(x) rtematres(task="broaden", term=x))
    return(unlist(lapply(broader_terms, function(x) x[1])))
 }
 
 #' @export annotate.dataframe
 annotate.dataframe <- function(input) {
-   concepts = content.find.common.concept(input)
-   definitions = lapply(concepts, function(x) rtematres(task="define", term=x))
-   classes = lapply(input, class)
-   annotation = list(class = classes,
-		     concecpts = concepts, 
-		     definitions = definitions)
+   column_classes = sapply(input, class)
+   concepts_body = content.find.concept(input)
+   definitions_body = lapply(concepts_body, function(x) rtematres(task="define", term=x))
+   concepts_header = header.find.concept(input)
+   definitions_header = lapply(names(input), function(x) rtematres(task="define", term=x))
+   annotation = list("column_classes" = column_classes,
+		     "concepts_body" = concepts_body, 
+		     "definitions_body" = definitions_body,
+		     "concepts_header" = concepts_header,
+		     "definitions_header" = definitions_header)
    annotation = do.call(cbind, annotation)
    # class(annotation) <- "annotation"
    return(annotation)

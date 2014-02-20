@@ -20,3 +20,9 @@ xmlNodesValue <- function(doc, path){
   if (length(out) == 0) return(NA)
   out
 }
+
+# clean a string from non letteric content
+cleanstrings <- function(input) {
+   cleaned =  gsub("[^[:alpha:]]" ," ", input)
+   return(cleaned)
+}

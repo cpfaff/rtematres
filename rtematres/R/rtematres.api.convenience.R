@@ -134,14 +134,21 @@ rtematres <- function(task, verbose=F, term, includenotes=F) {
     }
 
   if (task == "definerelation") {
+
     id = rtematres.api.conversion.term_id(term, warn = F)
-    directly = rtematres.api(task = "fetchDirectTerms", argument = id) # fetch all relations directly connected
-    sources = rtematres.api(task = "fetchSourceTerms", argument = id) # fetch all relations directly connected
-    targets = rtematres.api(task = "fetchTargetTerms", argument = id) # from source to target
-    down = rtematres.api(task = "fetchDown", argument = id)$term
-    up = rtematres.api(task = "fetchUp", argument = id)$term
-    related = rtematres.api(task = "fetchRelated", argument = id)
-    results = list(directly, sources, targets, down, up, related)
+
+    broader_terms = rtematres.api(task = "fetchUp", argument = id)$term
+    narrower_terms = rtematres.api(task = "fetchDown", argument = id)$term
+    directly_connected_terms = rtematres.api(task = "fetchDirectTerms", argument = id) # fetch all relations directly connected
+    source_terms = rtematres.api(task = "fetchSourceTerms", argument = id) # fetch all relations directly connected
+    target_terms = rtematres.api(task = "fetchTargetTerms", argument = id) # from source to target
+    related_terms = rtematres.api(task = "fetchRelated", argument = id)
+    results = list("broader_terms" = broader_terms, 
+		   "narrower_terms" = narrower_terms, 
+		   "source_terms" = source_terms, 
+		   "directly_connected_terms" = directly_connected_terms, 
+		   "target_terms" = target_terms, 
+		   "related_terms" = related_terms)
     return(results)
   }
 
