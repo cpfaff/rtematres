@@ -113,7 +113,8 @@ rtematres(task = "search", term = "plant organ", includenotes = T)
 ```
 
 ```
-## [1] "plant organ"   "crown"         "litter"        "plant nursery"
+## [1] "plant organ"   "crown"         "tree"          "litter"       
+## [5] "plant nursery"
 ```
 
 
@@ -127,31 +128,31 @@ rtematres(task = "search", term = "p")
 ##  [2] "P: biotop"                         
 ##  [3] "P: ecoregion"                      
 ##  [4] "P: habitat"                        
-##  [5] "P: subplots"                       
-##  [6] "parasite"                          
-##  [7] "parasitical"                       
-##  [8] "parasitism"                        
-##  [9] "parasitoid abundance"              
-## [10] "parasitoids olfactory orientation" 
-## [11] "parent"                            
-## [12] "pastures"                          
-## [13] "pathogen"                          
-## [14] "pcr"                               
-## [15] "peat"                              
-## [16] "pellet counting"                   
-## [17] "pellet decay"                      
-## [18] "perennial plant"                   
-## [19] "performance"                       
-## [20] "peroxidase"                        
-## [21] "pH"                                
-## [22] "phase or state of matter"          
-## [23] "phenology"                         
-## [24] "phosphate"                         
-## [25] "phosphorous"                       
-## [26] "photosynthetic performance"        
-## [27] "phyllosphere"                      
-## [28] "phylogenetic distinctness"         
-## [29] "phylogenetic diversity"            
+##  [5] "parasite"                          
+##  [6] "parasitical"                       
+##  [7] "parasitism"                        
+##  [8] "parasitoid abundance"              
+##  [9] "parasitoids olfactory orientation" 
+## [10] "parent"                            
+## [11] "pastures"                          
+## [12] "pathogen"                          
+## [13] "pcr"                               
+## [14] "peat"                              
+## [15] "pellet counting"                   
+## [16] "pellet decay"                      
+## [17] "perennial plant"                   
+## [18] "performance"                       
+## [19] "peroxidase"                        
+## [20] "pH"                                
+## [21] "phase or state of matter"          
+## [22] "phenology"                         
+## [23] "phosphate"                         
+## [24] "phosphorous"                       
+## [25] "photosynthetic performance"        
+## [26] "phyllosphere"                      
+## [27] "phylogenetic distinctness"         
+## [28] "phylogenetic diversity"            
+## [29] "phylum"                            
 ## [30] "phytometer"                        
 ## [31] "phytosymbiosis"                    
 ## [32] "pine"                              
@@ -222,7 +223,7 @@ rtematres(task = "define", term = "plant organ")
 ```
 
 ```
-## [1] "plant organ - a functional and structural unit of a plant"
+## [1] NA
 ```
 
 
@@ -236,7 +237,7 @@ rtematres(task = "broaden", term = "plant organ")
 ```
 
 ```
-## [1] "entity"      "eukaryotes"  "plant"       "plant part"  "plant organ"
+## [1] NA
 ```
 
 
@@ -246,8 +247,7 @@ rtematres(task = "narrow", term = "plant organ")
 ```
 
 ```
-## [1] "branch"        "flower"        "fruit"         "inflorescence"
-## [5] "leaf"          "seed"          "twig"
+## [1] NA
 ```
 
 
@@ -261,7 +261,7 @@ rtematres.api.conversion.term_id(given = "plant organ")
 ```
 
 ```
-## [1] "446"
+## [1] NA
 ```
 
 
@@ -287,25 +287,25 @@ rtematres.api(task = "fetchVocabularyData")
 ## [1] "en"
 ## 
 ## $uri
-## [1] "http://befdataproduction.biow.uni-leipzig.de/vocab/"
+## [1] "http://tematres.befdata.biow.uni-leipzig.de/vocab/"
 ## 
 ## $contributor
 ## [1] NA
 ## 
 ## $publisher
-## [1] NA
+## [1] "BEFdata"
 ## 
 ## $rights
-## [1] NA
+## [1] "all rights reserved"
 ## 
 ## $creation_date
-## [1] "1998-01-01"
+## [1] "2014-01-01"
 ## 
 ## $last_modified
 ## [1] "2014-02-06 09:30:07"
 ## 
 ## $count_terms
-## [1] "981"
+## [1] "992"
 ## 
 ## $status
 ## [1] "available"
@@ -332,14 +332,14 @@ annotate.dataframe(myframe)
 ```
 
 ```
-##               class     concecpts           
-## tree          "numeric" "NA"                
-## plant.organ   "factor"  "plant organ"       
-## species.names "factor"  "plant species name"
-##               definitions                                                
-## tree          "NA"                                                       
-## plant.organ   "plant organ - a functional and structural unit of a plant"
-## species.names "NA"
+##               column_classes concepts_body definitions_body
+## tree          "numeric"      NA            "NA"            
+## plant.organ   "factor"       NA            "NA"            
+## species.names "factor"       NA            "NA"            
+##               concepts_header definitions_header
+## tree          NA              "NA"              
+## plant.organ   NA              "NA"              
+## species.names NA              "NA"
 ```
 
 

@@ -58,6 +58,9 @@ rtematres.api.search <- function(term, task="search") {
 #' @param term Is the term(s) you like to execute the task for.
 #' @param verbose Either true of false and determines the ammount of info
 #'        that is returned by a query. 
+#' @param includenotes is a boolean that includes the notes in search for a 
+#'        term. All terms will pop up that contain the search string in 
+#'        their definition notes.
 #' @return The function returns either a dataframe for information or a list
 #'         of keywords and ids
 #' @examples \dontrun{

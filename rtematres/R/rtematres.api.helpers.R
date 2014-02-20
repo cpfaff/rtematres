@@ -9,9 +9,7 @@
 #' @param warn Give a waring when the term/id is not found. Defaults to TRUE.
 #'
 #' @return Either a string or id
-#' @export
-#' @alias rtematres.api.conversion.term_id rtematres.api.conversion.id_term
-
+ 
 rtematres.api.conversion.term_id <- rtematres.api.conversion.id_term <- function(given, warn = T) {
 	if(is.character(given)) {
 		response = rtematres.api(task = "search", argument = given)
@@ -26,7 +24,6 @@ rtematres.api.conversion.term_id <- rtematres.api.conversion.id_term <- function
 	}
 } 
 
-#' @export
 check_api_version <- function(package_api_version = rtematres.options("tematres_api_version")) {
 	server_api_version = rtematres.api(task ="fetchVocabularyData")$api_version
 	if(server_api_version != package_api_version) {

@@ -17,6 +17,10 @@ rtematres(task, verbose = F, term, includenotes = F)
 
   \item{verbose}{Either true of false and determines the
   ammount of info that is returned by a query.}
+
+  \item{includenotes}{is a boolean that includes the notes
+  in search for a term. All terms will pop up that contain
+  the search string in their definition notes.}
 }
 \value{
 The function returns either a dataframe for information or

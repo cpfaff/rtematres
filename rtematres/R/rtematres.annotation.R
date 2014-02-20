@@ -1,9 +1,6 @@
-#' This is the annotation features provided by rtematres
+# This is the annotation features provided by rtematres
 
-#' You can semantically annotate datasets base on a tematres 
-#' thesaurus. 
-
-content.find.concept <- function(input, showbroader = F) {
+content.find.concept <- function(input) {
    # handles data frame in a loop
    if(class(input) %in% c("list", "data.frame")) {
       return(sapply(input, function(x) content.find.concept(x)))
@@ -58,7 +55,14 @@ header.find.concept <- function(input) {
    return(unlist(lapply(broader_terms, function(x) x[1])))
 }
 
-#' @export annotate.dataframe
+#' This is the annotation features provided by rtematres
+
+#' @param input to be annotated 
+
+#' You can semantically annotate data frames base on a tematres 
+#' thesaurus. 
+
+#' @export annotate.dataframe 
 annotate.dataframe <- function(input) {
    column_classes = sapply(input, class)
    concepts_body = content.find.concept(input)
