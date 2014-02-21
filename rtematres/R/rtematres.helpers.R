@@ -27,18 +27,20 @@ cleanstrings <- function(input) {
    return(cleaned)
 }
 
-rtematres.api.conversion.term_id <- rtematres.api.conversion.id_term <- function(given, warn = T) {
-	if(is.character(given)) {
-		response = rtematres.api(task = "search", argument = given)
-		the_id_is = response$id[which(response$term == given)]
-		if(length(the_id_is) == 0) return(NA) # warning("Sorry no such term available!") 
-		return(the_id_is)
-	} else {
-		response = rtematres.api(task = "fetchTerm", argument = given)
-		the_term_is = response$term[which(response$id == given)]
-		if(length(the_term_is) == 0) return(NA) # warning("Sorry no such id available!")
-		return(the_term_is)
-	}
+cleanstrings_snake <- function(input) {
+   cleaned =  gsub("_" ," ", input)
+   return(cleaned)
+}
+
+
+rtematres.api.conversion.term_id <- rtematres.api.conversion.id_term <- function(given) {
+  if(is.character(given)) {
+    the_id_is = rtematres.api(task = "fetch", argument = given)$term_id
+    return(the_id_is)
+  } else {
+    the_term_is = rtematres.api(task = "fetchTerms", argument = given)$term
+    return(the_term_is)
+  }
 } 
 
 are.we.competible <- function(package_api_version = rtematres.options("tematres_api_version"), server_api_version = rtematres.api(task = "fetchVocabularyData")$api_version) {
@@ -50,3 +52,4 @@ are.we.competible <- function(package_api_version = rtematres.options("tematres_
     warning(paste0("But no guaranty that all will work properly!"))
   }
 }
+

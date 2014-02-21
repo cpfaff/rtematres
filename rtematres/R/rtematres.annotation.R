@@ -64,11 +64,16 @@ header.find.concept <- function(input) {
 
 #' @export annotate.dataframe 
 annotate.dataframe <- function(input) {
+   if(class(input) == "list") {
+    input = as.data.frame(input)
+   }
+
    column_classes = sapply(input, class)
    concepts_body = content.find.concept(input)
    definitions_body = lapply(concepts_body, function(x) rtematres(task="define", term=x))
    concepts_header = header.find.concept(input)
    definitions_header = lapply(names(input), function(x) rtematres(task="define", term=x))
+
    annotation = list("column_classes" = column_classes,
 		     "concepts_body" = concepts_body, 
 		     "definitions_body" = definitions_body,
@@ -78,3 +83,30 @@ annotate.dataframe <- function(input) {
    # class(annotation) <- "annotation"
    return(annotation)
 }
+
+
+#' @export annotate.dataframe 
+annotate.dataframe.clean <- function(input) {
+   if(class(input) == "list") {
+    input = as.data.frame(input)
+   }
+   column_classes = sapply(input, class)
+   
+   input = as.data.frame(lapply(input, cleanstrings_snake))
+
+   concepts_body = content.find.concept(input)
+   definitions_body = lapply(concepts_body, function(x) rtematres(task="define", term=x))
+   concepts_header = header.find.concept(input)
+   definitions_header = lapply(names(input), function(x) rtematres(task="define", term=x))
+
+   annotation = list("column_classes" = column_classes,
+		     "concepts_body" = concepts_body, 
+		     "definitions_body" = definitions_body,
+		     "concepts_header" = concepts_header,
+		     "definitions_header" = definitions_header)
+   annotation = do.call(cbind, annotation)
+   # class(annotation) <- "annotation"
+   return(annotation)
+}
+
+

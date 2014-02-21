@@ -40,12 +40,12 @@ convenient user functions.
     rtematres.api(task = "fetchDirectTerms", argument = 12)
     rtematres.api(task = "fetchURI", argument = 12)
     rtematres.api(task = "fetchTargetTerms", argument = 12 )
-    rtematres.api(task = "fetchSourceTerm", argument = 12)
+    rtematres.api(task = "fetchSourceTerm", argument = "measurement")
     rtematres.api(task = "fetchTerms", argument = '12,13' )
     rtematres.api(task = "fetchRelatedTerms", argument = '12,13' )
-    rtematres.api(task = "fetchSimilar", argument = 12)
+    rtematres.api(task = "fetchSimilar", argument = "mesur")
     rtematres.api(task = "fetchLast")
-    rtematres.api.conversion.keyword_id(given = "Measurement")
+    rtematres.api.conversion.keyword_id(given = "measurement")
     rtematres.api.conversion.keyword_id(given = 8)
  }
 }

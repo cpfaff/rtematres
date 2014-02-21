@@ -183,12 +183,12 @@ rtematres.api <- function(task = "availableTasks", argument) {
 				 relation_label = "//terms/relation_label",
 				 relation_type_id = "//relation_type_id")
 
-	notes_list = list(term = "//term/string", 
-			  term_id = "//term/term_id",
-			  note_id = "//term/note_id",
-			  note_type = "//term/note_type",
-			  note_language = "//term/note_lang",
-			  note_text = "//term/note_text")
+	fetchNotes_list = list(term = "//term/string", 
+			       term_id = "//term/term_id",
+			       note_id = "//term/note_id",
+			       note_type = "//term/note_type",
+			       note_language = "//term/note_lang",
+			       note_text = "//term/note_text")
 
 	directTerms_list = list(term = "//term/string",
 				language = "//term/lang",
@@ -255,7 +255,7 @@ rtematres.api <- function(task = "availableTasks", argument) {
 		       fetchUp = fetchUp_list,
 		       fetchRelated = fetchRelated_list,
 		       fetchRelatedTerms = fetchRelatedTerms_list,
-		       fetchNotes = notes_list,
+		       fetchNotes = fetchNotes_list,
 		       fetchDirectTerms = directTerms_list,
 		       fetchURI =fetchURI_list,
 		       fetchTargetTerms = fetchTargetTerms_list,
