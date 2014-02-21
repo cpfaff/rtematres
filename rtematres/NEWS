@@ -1,6 +1,9 @@
 rtematres 0.3
 ==================
 
+* updates to latest api version 1.4 which introduces an exact match of 
+  datasets (task = fetch)
+
 * introduces new smarter interface for search 
   - now embraces character search, default search, and search in notes
 

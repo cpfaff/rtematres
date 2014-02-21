@@ -2,6 +2,6 @@
   .rtematres.env$.rtematres.opts = list(
     tematres_url = "http://tematres.befdata.biow.uni-leipzig.de/vocab/index.php",
     tematres_service_url = "http://tematres.befdata.biow.uni-leipzig.de/vocab/services.php",
-    tematres_api_version = "1.3"
+    tematres_api_version = "1.4"
   )
 }

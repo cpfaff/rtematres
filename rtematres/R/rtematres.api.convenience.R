@@ -129,17 +129,14 @@ rtematres <- function(task, verbose=F, term, includenotes=F) {
 	editing = rtematres.api(task = "fetchTerm", argument = id)
 	results$created_at = editing$created_at
 	results$last_modified = editing$last_modified 
-
 	return(results)
       } else {
 	return(results$description)
       }
     }
 
-  if (task == "definerelation") {
-
+  if (task == "defineRelation") {
     id = rtematres.api.conversion.term_id(term, warn = F)
-
     broader_terms = rtematres.api(task = "fetchUp", argument = id)$term
     narrower_terms = rtematres.api(task = "fetchDown", argument = id)$term
     directly_connected_terms = rtematres.api(task = "fetchDirectTerms", argument = id) # fetch all relations directly connected
@@ -155,13 +152,13 @@ rtematres <- function(task, verbose=F, term, includenotes=F) {
     return(results)
   }
 
-  # old ones 
-
-  if (task == "fetchTerm")
+  if (task == "get")
     {
-      id = rtematres.api.conversion.term_id(term, warn = F)
+      id = rtematres.api.conversion.term_id(term)
+      results = rtematres.api(task = "fetchTerm", argument = id)
       return(results)
     }
+
   # if (task == "fetchTerms")
     # {
       # id = paste(sapply(term, function(x) rtematres.api.conversion.term_id(x, warn = F), USE.NAMES = F), collapse = ",")
