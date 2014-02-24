@@ -1,4 +1,4 @@
-# clean html strings 
+# clean html strings
 
 clean_html_string <- function(string) {
   remove_tags = gsub("<.*?>", "", string)
@@ -41,7 +41,7 @@ rtematres.api.conversion.term_id <- rtematres.api.conversion.id_term <- function
     the_term_is = rtematres.api(task = "fetchTerms", argument = given)$term
     return(the_term_is)
   }
-} 
+}
 
 are.we.competible <- function(package_api_version = rtematres.options("tematres_api_version"), server_api_version = rtematres.api(task = "fetchVocabularyData")$api_version) {
   if(server_api_version != package_api_version) {
@@ -53,3 +53,75 @@ are.we.competible <- function(package_api_version = rtematres.options("tematres_
   }
 }
 
+as.IsoDate <- function(input){
+	if(class(input) != "character") input = as.character(input)
+	input = empty.to.na(input)
+	return(input)
+	if(length(input) == 1) {
+	  dmy = FALSE
+	  mdy = FALSE
+
+	  # matches dd/mm/yyyy or dd.mm.yyyy or dd-mm-yyyy
+	  if(grepl("^(?:(?:31(\\/|-|\\.)(?:0?[13578]|1[02]))\\1|(?:(?:29|30)(\\/|-|\\.)(?:0?[1,3-9]|1[0-2])\\2))(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$|^(?:29(\\/|-|\\.)0?2\\3(?:(?:(?:1[6-9]|[2-9]\\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\\d|2[0-8])(\\/|-|\\.)(?:(?:0?[1-9])|(?:1[0-2]))\\4(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$", input)) {
+		  dmy = TRUE
+		  if(grepl("/", input)) clean_dmy = strsplit(input, split = "/")
+		  if(grepl("\\.", input)) clean_dmy = strsplit(input, split = ".")
+		  if(grepl("-", input)) clean_dmy = strsplit(input, split = "-")
+		  string = paste(unlist(clean_dmy)[c(3,2,1)], collapse = "-")
+	  }
+
+	  # matches mm/dd/yyyy or mm.dd.yyyy or mm-dd-yyyy
+	  if(grepl("^(?:(?:(?:0?[13578]|1[02])(\\/|-|\\.)31)\\1|(?:(?:0?[1,3-9]|1[0-2])(\\/|-|\\.)(?:29|30)\\2))(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$|^(?:0?2(\\/|-|\\.)29\\3(?:(?:(?:1[6-9]|[2-9]\\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:(?:0?[1-9])|(?:1[0-2]))(\\/|-|\\.)(?:0?[1-9]|1\\d|2[0-8])\\4(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$", input)) {
+		  mdy = TRUE
+		  if(grepl("/", input)) clean_mdy = strsplit(input, split = "/")
+		  if(grepl("\\.", input)) clean_mdy = strsplit(input, split = ".")
+		  if(grepl("-", input)) clean_mdy = strsplit(input, split = "-")
+		  string = paste(unlist(clean_mdy)[c(3,1,2)], collapse = "-")
+	  }
+
+	  if(mdy == T && dmy == T) return(NA)
+
+	  if(grepl("^(\\d{4})\\D?(0[1-9]|1[0-2])\\D?([12]\\d|0[1-9]|3[01])$", input)) {
+		  if(grepl("/", input)) clean = strsplit(input, split = "/")
+		  if(grepl("\\.", input)) clean = strsplit(input, split = ".")
+		  if(grepl("-", input)) clean = strsplit(input, split = "-")
+		  string = paste(unlist(clean), collapse = "-")
+	  }
+
+	  return(string)
+	} else {
+	  unlist(lapply(input, function(x) as.IsoDate(x)))
+	}
+}
+
+is.IsoDate <- function(input) {
+  if(class(input) != "character") input = as.character(input)
+  if(length(input) == 1) {
+    if(grepl("^(\\d{4})\\D?(0[1-9]|1[0-2])\\D?([12]\\d|0[1-9]|3[01])$", input)) {
+      return(TRUE)
+    } else {
+      return(FALSE)
+    }
+  } else {
+    as.logical(lapply(input, function(x) is.IsoDate(x)))
+  }
+}
+
+# converts empty strings in a vector to NA
+empty.to.na <- function(input) {
+  if(class(input) != "character") input = as.character(input)
+  input[input == ""] <- NA
+  return(input)
+}
+
+# check for valid years
+# is.year <- function(input) {
+	# if(any(is.na(input)) warning("There is a few values missing in your input. I ignore them!")
+	# grepl("^[1-9][0-9]{3}$", theyears[!is.na(theyears)])
+# }
+
+# check for valid years
+# is.month <- function(input) {
+	# if(any(is.na(input)) warning("There is a few values missing in your input. I ignore them!")
+	# grepl("^?()[1-12]$", months)
+# }

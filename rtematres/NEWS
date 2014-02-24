@@ -12,6 +12,12 @@ rtematres 0.3
   - It searches for the terms on tematres and makes a guess whats in 
     your columns. It returns a annotation metadata object that can be used 
     to start build up more sophisticated metadata automatically later on.
+  - adds a few conversion and checking tools for iso dates. They try to 
+    convert to ISO 8601 format for a few formats and give you feedback if
+    a date in ISO 8601 is in a column.
+
+      as.IsoDate(testdata_with_dates$date)
+      is.IsoDate(testdata_with_dates$date)
 
 rtematres 0.2
 ==================
