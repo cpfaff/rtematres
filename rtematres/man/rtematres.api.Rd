@@ -1,26 +1,28 @@
 \name{rtematres.api}
 \alias{rtematres.api}
-\title{Basic tematres server api}
+\title{Access to basic tematres server api}
 \usage{
 rtematres.api(task = "availableTasks", argument)
 }
 \arguments{
-  \item{task}{The api task you like to execute. Use the the
-  "availableTasks" to get an overview about the base api.
-  It returns a data frame with descriptions and the
+  \item{task}{The api task you like to perform. Use the the
+  task "availableTasks" to get an overview about the base
+  api. It returns a data frame with descriptions and the
   arguments for the tasks.}
 
   \item{argument}{Is the argument for the api task. You
-  find the information about the arguments when you call
-  the task "availableTasks".}
+  find the information about the type of arguments when you
+  call the task "availableTasks".  It depends on the task
+  if the argument is numeric or a character.}
 }
 \value{
-The function returns either a dataframe for information or
-a list of keywords and ids
+The function returns either a dataframe for
+"availableTasks" or a list of information elements for a
+certain task.
 }
 \description{
-Features the basic tasks of the tematres server api. With
-no sugar added. They are the basic building blocks for more
+Features the tasks of the tematres server api. With no
+sugar added. They are the basic building blocks for more
 convenient user functions.
 }
 \examples{
@@ -29,6 +31,10 @@ convenient user functions.
     rtematres.api(task = "fetchVocabularyData")
     rtematres.api(task = "fetchTopTerms")
     rtematres.api(task = "search", argument = "measurement")
+    rtematres.api(task = "fetch", argument = "measurement")
+    rtematres.api(task = "searchNotes", argument = "measurement")
+    rtematres.api(task = "suggest", argument = "measurement")
+    rtematres.api(task = "suggestDetails", argument = "measurement")
     rtematres.api(task = "letter", argument = "t")
     rtematres.api(task = "fetchTerm", argument = 12)
     rtematres.api(task = "fetchDown", argument = 4 )
@@ -43,10 +49,7 @@ convenient user functions.
     rtematres.api(task = "fetchSourceTerm", argument = "measurement")
     rtematres.api(task = "fetchTerms", argument = '12,13' )
     rtematres.api(task = "fetchRelatedTerms", argument = '12,13' )
-    rtematres.api(task = "fetchSimilar", argument = "mesur")
     rtematres.api(task = "fetchLast")
-    rtematres.api.conversion.keyword_id(given = "measurement")
-    rtematres.api.conversion.keyword_id(given = 8)
  }
 }
 
