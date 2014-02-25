@@ -113,29 +113,35 @@ is.IsoDate <- function(input) {
 }
 
 # check for valid years
-is.year <- function(input) {
-	if(any(is.na(input))) warning("There is a few values missing in your input. I ignore them!")
-	grepl("^[1-9][0-9]{3}$", input[!is.na(input)])
+in.range.year <- function(input) {
+  if(any(is.na(input))) warning("There is a few values missing in your input. I ignore them!")
+  grepl("^[1-9][0-9]{3}$", input[!is.na(input)])
 }
 
-year.to.range <- function(input){
-	if(class(input) != "character") input = as.character(input)
-	is.year(input)
-	range <- max(input) - min(input)
-	if(range == 0) return (unique(input)) else range
+# check for valid months
+in.range.month <- function(input) {
+  if(any(is.na(input))) warning("There is a few values missing in your input. I ignore them!")
+  grepl("(^0?[1-9]$|^[1][0-2]$)", input)
 }
 
-# check for valid years
-# is.month <- function(input) {
-	# if(any(is.na(input)) warning("There is a few values missing in your input. I ignore them!")
-	# grepl("^?()[1-12]$", months)
-# }
+# check for valid days
+in.range.day <- function(input) {
+  if(any(is.na(input))) warning("There is a few values missing in your input. I ignore them!")
+  grepl("(^0?[1-9]$|^[12][0-9]$|^3[01]$)", input)
+}
 
+# get year range
+years.to.range <- function(input){
+  if(class(input) != "numeric") input = as.numeric(input)
+  if(!any(in.range.year(input))) error("Not all are valid years")
+  range <- max(input) - min(input)
+  return(range)
+}
 
 ## String helpers
 
 # converts empty strings in a vector to NA
-string.empty.as_na <- function(input) {
+string.empty.to_na <- function(input) {
   if(class(input) != "character") input = as.character(input)
   input[input == ""] <- NA
   return(input)
@@ -145,4 +151,3 @@ string.empty.rm <- function(input){
   if(class(input) != "character") input = as.character(input)
   input[input != ""]
 }
-
