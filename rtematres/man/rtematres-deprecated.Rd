@@ -1,0 +1,18 @@
+\name{rtematres-deprecated}
+\alias{rtematres-deprecated}
+\alias{rtematres.api.do}
+\title{Deprecated functions in package rtematres}
+\usage{
+rtematres.api.do(...)
+}
+\description{
+These following functions are renamed or removed. Please
+use new functions instead.
+}
+\details{
+\tabular{ll}{ \strong{Deprecated functions} \tab
+\strong{Replacement} \cr \code{rtematres.api.do} \tab
+\code{\link{rtematres}} \cr }
+}
+\keyword{internal}
+

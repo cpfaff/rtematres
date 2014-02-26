@@ -1,6 +1,6 @@
 # clean html strings
 
-clean_html_string <- function(string) {
+html.escape <- function(string) {
   remove_tags = gsub("<.*?>", "", string)
   remove_newlines = gsub("\\n"," ",remove_tags)
   replace_escaped_quotes = gsub("\"", "'", remove_newlines)
@@ -55,7 +55,7 @@ are.we.competible <- function(package_api_version = rtematres.options("tematres_
 
 as.IsoDate <- function(input, return_format = F){
   if(class(input) != "character") input = as.character(input)
-  input = string.empty.as_na(input)
+  input = string.empty.to_na(input)
   if(length(input) == 1) {
     dmy = FALSE
     mdy = FALSE
@@ -150,4 +150,13 @@ string.empty.to_na <- function(input) {
 string.empty.rm <- function(input){
   if(class(input) != "character") input = as.character(input)
   input[input != ""]
+}
+
+## check for input and warn
+unless.input.character.stop <- function(input){
+  if(class(input) != "character") stop("This task only takes a string as input")
+}
+
+unless.input.numeric.stop <- function(input){
+  if(class(input) != "numeric") stop("This task only takes a number as input")
 }

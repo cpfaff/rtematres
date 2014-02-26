@@ -35,6 +35,7 @@ convenient user functions.
     rtematres.api(task = "searchNotes", argument = "measurement")
     rtematres.api(task = "suggest", argument = "measurement")
     rtematres.api(task = "suggestDetails", argument = "measurement")
+    rtematres.api(task = "fetchSimilar", argument = "tre")
     rtematres.api(task = "letter", argument = "t")
     rtematres.api(task = "fetchTerm", argument = 12)
     rtematres.api(task = "fetchDown", argument = 4 )

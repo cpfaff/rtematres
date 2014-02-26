@@ -23,6 +23,7 @@
 #'     rtematres.api(task = "searchNotes", argument = "measurement")
 #'     rtematres.api(task = "suggest", argument = "measurement")
 #'     rtematres.api(task = "suggestDetails", argument = "measurement")
+#'     rtematres.api(task = "fetchSimilar", argument = "tre")
 #'     rtematres.api(task = "letter", argument = "t")
 #'     rtematres.api(task = "fetchTerm", argument = 12)
 #'     rtematres.api(task = "fetchDown", argument = 4 )
@@ -56,7 +57,7 @@ rtematres.api <- function(task = "availableTasks", argument) {
 	}
 
 	# select task
-	task = match.arg(task, c("fetchVocabularyData", "suggest", "suggestDetails", "fetchTopTerms", "search", "fetch", "searchNotes", "fetchCode", "letter", "fetchTerm", "fetchAlt", "fetchDown", "fetchUp", "fetchRelated", "fetchNotes", "fetchDirectTerms", "fetchURI", "fetchTargetTerms", "fetchSourceTerms", "fetchTerms", "fetchRelatedTerms", "fetchLast"))
+	task = match.arg(task, c("fetchVocabularyData", "suggest", "suggestDetails", "fetchTopTerms", "search", "fetch", "searchNotes", "fetchCode", "fetchSimilar", "letter", "fetchTerm", "fetchAlt", "fetchDown", "fetchUp", "fetchRelated", "fetchNotes", "fetchDirectTerms", "fetchURI", "fetchTargetTerms", "fetchSourceTerms", "fetchTerms", "fetchRelatedTerms", "fetchLast"))
 
 	tasks_need_no_argument = c("fetchLast", "fetchTopTerms", "fetchVocabularyData")
 
@@ -113,7 +114,7 @@ rtematres.api <- function(task = "availableTasks", argument) {
 			   index = "//term/index",
 			   order = "//term/order")
 
-	# this task is for search with exact matching available sind api 1.4
+	# this task is for search with exact matching available since api version 1.4
 	fetch_list = list(term = "//term/string",
 			  term_id = "//term/term_id",
 			  is.meta.term = "//term/isMetaTerm",
@@ -249,7 +250,8 @@ rtematres.api <- function(task = "availableTasks", argument) {
 		       searchNotes = search_list,
 		       suggest = suggest_list,
 		       suggestDetails = suggestDetails_list,
-		       letter = base_list,
+		       fetchSimilar = fetch_similar_list,
+		       letter = letter_list,
 		       fetchAlt = fetchAlt_list,
 		       fetchTerm = fetchTerm_list,
 		       fetchTerms = fetchTerms_list,
