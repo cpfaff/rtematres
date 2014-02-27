@@ -133,7 +133,7 @@ in.range.day <- function(input) {
 # get year range
 years.to.range <- function(input){
   if(class(input) != "numeric") input = as.numeric(input)
-  if(!any(in.range.year(input))) error("Not all are valid years")
+  if(!any(in.range.year(input))) stop("Not all are valid years")
   range <- max(input) - min(input)
   return(range)
 }
@@ -150,11 +150,6 @@ string.empty.to_na <- function(input) {
 string.empty.rm <- function(input){
   if(class(input) != "character") input = as.character(input)
   input[input != ""]
-}
-
-## check for input and warn
-unless.input.character.stop <- function(input){
-  if(class(input) != "character") stop("This task only takes a string as input")
 }
 
 unless.input.numeric.stop <- function(input){
