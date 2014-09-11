@@ -259,22 +259,6 @@ rtematres.define("plant organ")
 ```
 
 ```
-## $term
-## [1] "plant organ"
-## 
-## $term_id
-## [1] "446"
-## 
-## $note_id
-## [1] "13"
-## 
-## $note_type
-## [1] "DF"
-## 
-## $note_language
-## [1] "en"
-## 
-## $note_text
 ## [1] "plant organ - a functional and structural unit of a plant"
 ```
 
