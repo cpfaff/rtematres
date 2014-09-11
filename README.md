@@ -1,26 +1,27 @@
-# The R package for tematres
+# The R package for TemaTres
 
 
 
-The `rtematres` package is an api package to exploit vocabulary or formal 
-representations of knowledge on any [tematres server](http://www.vocabularyserver.com/)
-instance. It gives you access to the base API functions and their
-documentation and offers convenient wrapper functions that ease the explotion
-of the vocabolary.
+The `rtematres` package allows to exploit vocabularies hosted on any instance
+of the [TemaTres vocabulary server](http://www.vocabularyserver.com/). It gives
+you access to the base API functions of the server and their documentation as
+well as it offers convenient wrapper functions that ease the access to the
+vocabulary.
 
 ### Development note:
 
-The package is still in an early state and currently under improvement. This
-might reseult in changing of function names and a high possiblity of finding an
-unusable package in the master branch. If you are interested to get a currently
-stable version please install from Cran.
+The package is in an active development state. This might result in changes of
+function names and you might also find the source in master in an unusable
+state. If you are interested in a stable version please install the package
+using the CRAN repository.
 
 ### Install
 
 #### From CRAN
 
-Find the package and manual on [CRAN](http://cran.r-project.org/web/packages/rtematres/index.html). You
-can simply install the version hosted there issuing the command below:
+Find the package including manual on
+[CRAN](http://cran.r-project.org/web/packages/rtematres/index.html). You can
+simply install the version hosted there issuing the command below:
 
 ```
 install.packages("rtematres")
@@ -28,7 +29,7 @@ install.packages("rtematres")
 
 #### From github
 
-The installation from Github requires the `devtools` package.
+The installation from GitHub requires the `devtools` package.
 
 ```
 # install devtools:
@@ -55,24 +56,161 @@ library(rtematres)
 
 `rtematres.options()`
 
+As you can see there is various fields in the list you can change these simply
+calling the function with the field names to change assigning new values.
+
 * Set options
 
-`rtematres.options("tematres_url" = "http://url.to/your/tematres/server")`
 `rtematres.options("tematres_service_url" = "http://url.to/your/tematres/server/api")`
 
-Note: `tematres_url` is informative only atm but you need to set the url in `tematres_service_ur`
-to the `services.php` of the tematres server. This is the the access to the api.
+# Exploit the vocabulary 
+
+## Get information 
+
+This example uses the TemaTres server of the BEF-China project:
+
+* Display server and vocabulary information:
 
 
-#### Exploit the vocabulary 
+```r
+rtematres(task = "fetchVocabularyData")
+```
+
+```
+## $vocabulary_id
+## [1] "1"
+## 
+## $title
+## [1] "BEFdata"
+## 
+## $author
+## [1] "Claas-Thido Pfaff"
+## 
+## $language
+## [1] "en"
+## 
+## $scope
+## [1] "biology"
+## 
+## $keywords
+## [1] "biology, ecosystem functioning, ecosystem service,"
+## 
+## $uri
+## [1] "http://tematres.befdata.biow.uni-leipzig.de/vocab/"
+## 
+## $created_at
+## [1] "2014-01-01"
+## 
+## $last_modified_at
+## [1] "2014-02-06 09:30:07"
+## 
+## $contributors
+## [1] NA
+## 
+## $publisher
+## [1] "BEFdata"
+## 
+## $rights
+## [1] "all rights reserved"
+## 
+## $count_of_terms
+## [1] "1019"
+## 
+## $status
+## [1] "available"
+## 
+## $server_version
+## [1] "TemaTres 1.72"
+## 
+## $api_version
+## [1] "1.4"
+```
+
+## Base API functionality
+
+* broaden/narrow
+
+Fetches broader or narrower terms for a term you provide
+
+
+```r
+rtematres(task = "fetchUp", term = "plant organ")
+```
+
+```
+## $term
+## [1] "entity"      "eukaryotes"  "plant"       "plant part"  "plant organ"
+## 
+## $term_id
+## [1] "348" "365" "415" "436" "446"
+## 
+## $is.meta.term
+## [1] "0" "0" "0" "0" "0"
+## 
+## $relation_type_id
+## [1] NA
+## 
+## $order
+## [1] "1" "2" "3" "4" "5"
+```
+
+
+```r
+rtematres(task = "fetchDown", term = "plant organ")
+```
+
+```
+## $term
+## [1] "branch"        "flower"        "fruit"         "inflorescence"
+## [5] "leaf"          "seed"          "twig"         
+## 
+## $language
+## [1] NA
+## 
+## $term_id
+## [1] "456" "447" "449" "450" "451" "454" "457"
+## 
+## $is.meta.term
+## [1] NA
+## 
+## $relation_type
+## [1] "NT" "NT" "NT" "NT" "NT" "NT" "NT"
+## 
+## $relation_code
+## [1] NA
+## 
+## $relation_label
+## [1] NA
+## 
+## $has_narrower_terms
+## [1] "0" "1" "0" "0" "1" "0" "0"
+```
+
+And many more tasks are supported....
+
+
+
+
+```
+##  [1] "fetchVocabularyData" "fetchTopTerms"       "search"             
+##  [4] "fetch"               "searchNotes"         "suggest"            
+##  [7] "suggestDetails"      "fetchCode"           "letter"             
+## [10] "fetchTerm"           "fetchAlt"            "fetchDown"          
+## [13] "fetchUp"             "fetchRelated"        "fetchNotes"         
+## [16] "fetchDirectTerms"    "fetchURI"            "fetchTargetTerms"   
+## [19] "fetchSourceTerms"    "fetchTerms"          "fetchRelatedTerms"  
+## [22] "fetchSimilar"        "fetchLast"
+```
+
+## Higher functions 
 
 You have access to a few convenient functions to exploit the vocabulary hosted
-on your tematres vocabulary server.
+on your TemaTres vocabulary server.
 
-* search
+* Search
 
-Search for terms by name. If you search for one letter it will list all terms
-that begin with the letter. 
+Search for terms by name. If you search for one letter only it will list all
+terms that begin with the letter. 
 
 
 ```r
@@ -199,9 +337,9 @@ rtematres.search("p")
 ## [86] "pyrosequencing"
 ```
 
-* define
+* Define
 
-Fetches definitions from definition notes of a concept in your thesaurus.
+Fetch definitions from definition notes of a concept in your thesaurus.
 
 
 ```r
@@ -212,9 +350,9 @@ rtematres.define("plant organ")
 ## [1] "plant organ - a functional and structural unit of a plant"
 ```
 
-* locate
+* Locate
 
-To locate a certain term in its hierarchy
+Helps you locate a certain term in the hierarchy provided by the vocabulary.
 
 
 
@@ -228,7 +366,10 @@ rtematres.hierarchy("plant organ")
 ##  [9] "inflorescence" "leaf"          "seed"          "twig"
 ```
 
-* find common concepts of factorial vectors
+* Find common concepts
+
+It takes factorial vectors and queries the vocabulary for their hierarchy.
+Then it displays the common concept of the both therms if there is any.
 
 
 ```r
@@ -239,8 +380,13 @@ rtematres.common(c("carbon", "nitrogen"))
 ## [1] "element substance"
 ```
 
-* summarize vectors to concepts or create summary for
-  numerics
+* Summarize vectors 
+  
+If you provide this function with a numeric vector it will calculate a 5 value
+summary and for categorical, character vectors find the common concept.
+
+> This is the first step towards a higher order annotation and metadata creation
+> feature.
 
 
 ```r
@@ -268,124 +414,4 @@ lapply(iris, function(x) rtematres.summary(x))
 ## [1] NA
 ```
 
-* broaden/narrow
-
-Fetches broader or narrower terms for a term you provide
-
-
-```r
-rtematres(task = "fetchUp", term = "plant organ")
-```
-
-```
-## $term
-## [1] "entity"      "eukaryotes"  "plant"       "plant part"  "plant organ"
-## 
-## $term_id
-## [1] "348" "365" "415" "436" "446"
-## 
-## $is.meta.term
-## [1] "0" "0" "0" "0" "0"
-## 
-## $relation_type_id
-## [1] NA
-## 
-## $order
-## [1] "1" "2" "3" "4" "5"
-```
-
-
-```r
-rtematres(task = "fetchDown", term = "plant organ")
-```
-
-```
-## $term
-## [1] "branch"        "flower"        "fruit"         "inflorescence"
-## [5] "leaf"          "seed"          "twig"         
-## 
-## $language
-## [1] NA
-## 
-## $term_id
-## [1] "456" "447" "449" "450" "451" "454" "457"
-## 
-## $is.meta.term
-## [1] NA
-## 
-## $relation_type
-## [1] "NT" "NT" "NT" "NT" "NT" "NT" "NT"
-## 
-## $relation_code
-## [1] NA
-## 
-## $relation_label
-## [1] NA
-## 
-## $has_narrower_terms
-## [1] "0" "1" "0" "0" "1" "0" "0"
-```
-
-## Get information 
-
-This example uses the tematres server of the BEF-China project:
-
-* Display server and vocabulary information:
-
-
-```r
-rtematres(task = "fetchVocabularyData")
-```
-
-```
-## $vocabulary_id
-## [1] "1"
-## 
-## $title
-## [1] "BEFdata"
-## 
-## $author
-## [1] "Claas-Thido Pfaff"
-## 
-## $language
-## [1] "en"
-## 
-## $scope
-## [1] "biology"
-## 
-## $keywords
-## [1] "biology, ecosystem functioning, ecosystem service,"
-## 
-## $uri
-## [1] "http://tematres.befdata.biow.uni-leipzig.de/vocab/"
-## 
-## $created_at
-## [1] "2014-01-01"
-## 
-## $last_modified_at
-## [1] "2014-02-06 09:30:07"
-## 
-## $contributors
-## [1] NA
-## 
-## $publisher
-## [1] "BEFdata"
-## 
-## $rights
-## [1] "all rights reserved"
-## 
-## $count_of_terms
-## [1] "1019"
-## 
-## $status
-## [1] "available"
-## 
-## $server_version
-## [1] "TemaTres 1.72"
-## 
-## $api_version
-## [1] "1.4"
-```
-
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/cpfaff/rtematres/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
