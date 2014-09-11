@@ -100,7 +100,7 @@ rtematres.common <- function(input) {
 #'     lapply(iris, function(x) rtematres.summary(input = x))
 #'  }
 #'
-#' @export rtematres.common
+#' @export rtematres.summary
 
 rtematres.summary <- function(input) {
    if(is.factor(input)) {
