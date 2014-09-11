@@ -33,9 +33,9 @@ rtematres.define <- function(term) {
 rtematres.search <- function(term) {
   if(nchar(term) == 1)
   {
-    results = suppressWarnings(rtematres(task = "letter", term = term))
+    results = suppressWarnings(rtematres(task = "letter", term = term)$term)
   } else {
-    results = suppressWarnings(rtematres(task = "search", term = term))
+    results = suppressWarnings(rtematres(task = "search", term = term)$term)
   }
   if(length(results$term) == 1 && all(is.na(results$term)) || is.null(results)){
     suggestion = rtematres(task = "fetchSimilar", term = term)$term
@@ -45,7 +45,6 @@ rtematres.search <- function(term) {
     return(results)
   }
 }
-
 
 #' Locate concepts in hierarchy
 #'

@@ -79,11 +79,11 @@ Search for terms by name. If you search for one letter it will list all terms
 that begin with the letter. 
 
 ```{r}
-rtematres.search(term = "plant")
+rtematres.search("plant")
 ```
 
 ```{r}
-rtematres.search(term = "p")
+rtematres.search("p")
 ```
 
 * define
