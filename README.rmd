@@ -39,8 +39,9 @@ The installation from Github requires the `devtools` package.
 # install devtools:
 install.packages("devtools")
 # install rtematres:
-library(devtools)
-install_github(username = "cpfaff", repo = "rtematres", subdir = "rtematres") 
+require(devtools)
+install_github("cpfaff/rtematres", subdir = "rtematres") 
+require(rtematres)
 ```
 
 ### Usage
