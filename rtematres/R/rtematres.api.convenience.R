@@ -103,9 +103,6 @@ rtematres.common <- function(input) {
 #' @export rtematres.summary
 
 rtematres.summary <- function(input) {
-   if(is.data.frame(input)) {
-     lapply(input, function(x) rtematres.summary(input = x))
-   }
    if(is.factor(input)) {
      return_value = suppressWarnings(rtematres.common(as.character(input)))
    }

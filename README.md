@@ -305,13 +305,33 @@ rtematres.common(c("carbon", "nitrogen"))
 ## [1] "element substance"
 ```
 
+* summarize vectors to concepts or create summary for
+  numerics
+
 
 ```r
-rtematres.summary(iris)
+lapply(iris, function(x) rtematres.summary(x))
 ```
 
 ```
-## Error: object 'return_value' not found
+## $Sepal.Length
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    4.30    5.10    5.80    5.84    6.40    7.90 
+## 
+## $Sepal.Width
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    2.00    2.80    3.00    3.06    3.30    4.40 
+## 
+## $Petal.Length
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    1.00    1.60    4.35    3.76    5.10    6.90 
+## 
+## $Petal.Width
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##     0.1     0.3     1.3     1.2     1.8     2.5 
+## 
+## $Species
+## [1] NA
 ```
 
 * broaden/narrow

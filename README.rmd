@@ -109,8 +109,11 @@ rtematres.hierarchy("plant organ")
 rtematres.common(c("carbon", "nitrogen"))
 ```
 
+* summarize vectors to concepts or create summary for
+  numerics
+
 ```{r}
-rtematres.summary(iris)
+lapply(iris, function(x) rtematres.summary(x))
 ```
 
 * broaden/narrow
