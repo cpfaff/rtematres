@@ -75,20 +75,16 @@ on your tematres vocabulary server.
 
 * search
 
-Search for terms by name. You can also include the notes in your search. This
-will provide you with terms mentioning the search term in their definition.  If
-you search for one letter it will list all terms that begin with the letter.
+Search for terms by name. If you search for one letter it will list all terms
+that begin with the letter. As you see there is a subsetting done. This is
+because of the function returns are more verbose.
 
 ```{r}
-rtematres(task = "search", term = "plant")
+rtematres.search(term = "plant")$term
 ```
 
 ```{r}
-rtematres(task = "search", term = "plant organ", includenotes = T)
-```
-
-```{r}
-rtematres(task = "search", term = "p")
+rtematres.search(term = "p")$term
 ```
 
 * define
@@ -96,7 +92,7 @@ rtematres(task = "search", term = "p")
 Fetches definitions from definition notes of a concept in your thesaurus.
 
 ```{r}
-rtematres(task = "define", term = "plant organ")
+rtematres.define("plant organ")$note_text
 ```
 
 * broaden/narrow
@@ -104,19 +100,11 @@ rtematres(task = "define", term = "plant organ")
 Fetches broader or narrower terms for a term you provide
 
 ```{r}
-rtematres(task = "broaden", term = "plant organ")
+rtematres(task = "fetchUp", term = "plant organ")
 ```
 
 ```{r}
-rtematres(task = "narrow", term = "plant organ")
-```
-
-#### Helper
-
-* convert a term to the index id of your term in your thesaurus
-
-```{r}
-rtematres.api.conversion.term_id(given = "plant organ")
+rtematres(task = "fetchDown", term = "plant organ")
 ```
 
 ## Get information 
@@ -126,7 +114,7 @@ This example uses the tematres server of the BEF-China project:
 * Display server and vocabulary information:
 
 ```{r}
-rtematres.api(task = "fetchVocabularyData")
+rtematres(task = "fetchVocabularyData")
 ```
 
 ## Annotate data frames
