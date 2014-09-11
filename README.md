@@ -63,9 +63,8 @@ calling the function with the field names to change assigning new values.
 
 `rtematres.options("tematres_service_url" = "http://url.to/your/tematres/server/api")`
 
-# Exploit the vocabulary 
 
-## Get information 
+#### Get information 
 
 This example uses the TemaTres server of the BEF-China project:
 
@@ -126,7 +125,7 @@ rtematres(task = "fetchVocabularyData")
 ## [1] "1.4"
 ```
 
-## Base API functionality
+#### Base functionality
 
 * broaden/narrow
 
@@ -202,7 +201,7 @@ And many more tasks are supported....
 ## [22] "fetchSimilar"        "fetchLast"
 ```
 
-## Higher functions 
+#### Higher order functions 
 
 You have access to a few convenient functions to exploit the vocabulary hosted
 on your TemaTres vocabulary server.
