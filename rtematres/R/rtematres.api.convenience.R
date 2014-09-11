@@ -17,7 +17,7 @@ rtematres.define <- function(term) {
   if(is.na(term_notes$note_text)) {
     warning("Sorry no definition for your term found!")
   } else {
-    return(term_notes)
+    return(term_notes$note_text)
   }
 }
 
