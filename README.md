@@ -54,14 +54,33 @@ library(rtematres)
 
 * List options
 
-`rtematres.options()`
+
+```r
+rtematres.options()
+```
+
+```
+## $tematres_service_url
+## [1] "http://tematres.befdata.biow.uni-leipzig.de/vocab/services.php"
+## 
+## $package_api_version
+## [1] "1.4"
+## 
+## $server_api_version
+## [1] NA
+```
 
 As you can see there is various fields in the list you can change these simply
 calling the function with the field names to change assigning new values.
 
 * Set options
 
-`rtematres.options("tematres_service_url" = "http://url.to/your/tematres/server/api")`
+
+
+You need to set the `tematres_service_url` to point to the `service.php` as the
+this is the access point to the API.
+
+`rtematres.options("tematres_service_url" = "http://url.to/your/tematres/server/api/service.php")`
 
 
 #### Get information 

@@ -59,14 +59,23 @@ library(rtematres)
 
 * List options
 
-`rtematres.options()`
+```{r}
+rtematres.options()
+```
 
 As you can see there is various fields in the list you can change these simply
 calling the function with the field names to change assigning new values.
 
 * Set options
 
-`rtematres.options("tematres_service_url" = "http://url.to/your/tematres/server/api")`
+```{r include = F}
+rtematres.options()
+```
+
+You need to set the `tematres_service_url` to point to the `service.php` as the
+this is the access point to the API.
+
+`rtematres.options("tematres_service_url" = "http://url.to/your/tematres/server/api/service.php")`
 
 
 #### Get information 
