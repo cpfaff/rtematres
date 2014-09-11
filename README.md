@@ -227,8 +227,7 @@ on your TemaTres vocabulary server.
 
 * Search
 
-Search for terms by name. If you search for one letter only it will list all
-terms that begin with the letter. 
+Search for terms by name. 
 
 
 ```r
@@ -260,6 +259,9 @@ rtematres.search("plant")
 ## [22] "plantago lanceolata"                          
 ## [23] "vascular plant"
 ```
+
+If you search for one letter only it will list all terms that begin with the
+letter.
 
 
 ```r
@@ -355,7 +357,7 @@ rtematres.search("p")
 ## [86] "pyrosequencing"
 ```
 
-Also offering a suggestion mechanism
+It also offers a suggestion mechanism
 
 
 ```r
