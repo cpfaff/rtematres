@@ -130,6 +130,12 @@ rtematres.search("plant")
 rtematres.search("p")
 ```
 
+Also offering a suggestion mechanism
+
+```{r}
+rtematres.search("siol")
+```
+
 * Define
 
 Fetch definitions from definition notes of a concept in your thesaurus.

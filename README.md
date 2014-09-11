@@ -355,6 +355,21 @@ rtematres.search("p")
 ## [86] "pyrosequencing"
 ```
 
+Also offering a suggestion mechanism
+
+
+```r
+rtematres.search("siol")
+```
+
+```
+## Warning: Sorry no results for your query! Do you mean: soil
+```
+
+```
+## [1] "soil"
+```
+
 * Define
 
 Fetch definitions from definition notes of a concept in your thesaurus.
