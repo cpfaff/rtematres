@@ -39,8 +39,9 @@
 #' @export rtematres
 
 rtematres <- function(task, verbose = F, term) {
+  is_verbose = verbose
 
-  task = match.arg(task, c("fetchVocabularyData", "suggest", "suggestDetails", "fetchTopTerms", "search", "fetch", "searchNotes", "fetchCode", "fetchSimilar", "letter", "fetchTerm", "fetchAlt", "fetchDown", "fetchUp", "fetchRelated", "fetchNotes", "fetchDirectTerms", "fetchURI", "fetchTargetTerms", "fetchSourceTerms", "fetchTerms", "fetchRelatedTerms", "fetchLast"))
+  task = match.arg(task, c("availableTasks","fetchVocabularyData", "suggest", "suggestDetails", "fetchTopTerms", "search", "fetch", "searchNotes", "fetchCode", "fetchSimilar", "letter", "fetchTerm", "fetchAlt", "fetchDown", "fetchUp", "fetchRelated", "fetchNotes", "fetchDirectTerms", "fetchURI", "fetchTargetTerms", "fetchSourceTerms", "fetchTerms", "fetchRelatedTerms", "fetchLast"))
 
   # task only tasks
   if(task == "availableTasks")
@@ -62,24 +63,36 @@ rtematres <- function(task, verbose = F, term) {
   if(task == "fetchLast")
   {
     results = rtematres.api(task = "fetchLast")
-    return(results)
+    if(length(results$term) == 1 && all(is.na(results$term))){
+      warning("Sorry no results for your query!")
+    } else {
+      return(results)
+    }
   }
 
-  # tasks that accept multiple terms
+  # tasks that accept multiple terms NOTE: This must be tested if it works
+  if(task %in% c("fetchTerms", "fetchRelatedTerms")){
+    if(class(term) != "character") stop("This task only takes a string or character vector as input")
+    id = paste(sapply(term, function(x) rtematres.api.conversion.term_id(x), USE.NAMES = F), collapse = ",")
+  }
 
   if(task == "fetchTerms")
   {
-    if(class(term) != "character") stop("This task only takes a string or character vector as input")
-    id = paste(sapply(term, function(x) rtematres.api.conversion.term_id(x), USE.NAMES = F), collapse = ",")
     results = rtematres.api(task = "fetchTerms", argument = id)
-    return(results)
+    if(length(results$term) == 1 && all(is.na(results$term))){
+      warning("Sorry no results for your query!")
+    } else {
+      return(results)
+    }
   }
   if(task == "fetchRelatedTerms")
   {
-    if(class(term) != "character") stop("This task only takes a string as input")
-    id = paste(sapply(term, function(x) rtematres.api.conversion.term_id(x), USE.NAMES = F), collapse = ",")
     results = rtematres.api(task = "fetchRelatedTerms", argument = id)
-    return(results)
+    if(length(results$term) == 1 && all(is.na(results$term))){
+      warning("Sorry no results for your query!")
+    } else {
+      return(results)
+    }
   }
 
   # tasks that accept one term
@@ -89,7 +102,11 @@ rtematres <- function(task, verbose = F, term) {
   if(task == "fetchCode")
   {
     results = rtematres.api(task = "fetchCode", argument = term)
-    return(results)
+    if(length(results$term) == 1 && all(is.na(results$term))){
+      warning("Sorry no results for your query!")
+    } else {
+      return(results)
+    }
   }
 
   if(task == "search")
@@ -97,24 +114,38 @@ rtematres <- function(task, verbose = F, term) {
     if(nchar(term) < 2) {
       stop("This task only works for > 2 letters")
     }
-    search = rtematres.api(task = "search", argument = term)
-    return(search)
+    results = rtematres.api(task = "search", argument = term)
+    if(length(results$term) == 1 && all(is.na(results$term))){
+      warning("Sorry no results for your query!")
+    } else {
+      return(results)
+    }
+
   }
+
   if(task == "fetch")
   {
     if(nchar(term) < 2) {
       stop("This task only works for > 2 letters")
     }
     results = rtematres.api(task = "fetch", argument = term)
-    return(results)
+    if(length(results$term) == 1 && all(is.na(results$term))){
+      warning("Sorry no results for your query!")
+    } else {
+      return(results)
+    }
   }
   if(task == "searchNotes")
   {
     if(nchar(term) < 2) {
       warning("This task only works for > 2 letters")
     }
-    search = rtematres.api(task = "searchNotes", argument = term)
-    return(search)
+    results = rtematres.api(task = "searchNotes", argument = term)
+    if(length(results$term) == 1 && all(is.na(results$term))){
+      warning("Sorry no results for your query!")
+    } else {
+      return(results)
+    }
   }
   if(task == "suggest")
   {
@@ -122,7 +153,11 @@ rtematres <- function(task, verbose = F, term) {
       warning("This task only works for > 2 letters")
     }
     results = rtematres.api(task = "suggest", argument = term)
-    return(results)
+    if(length(results$term) == 1 && all(is.na(results$term))){
+      warning("Sorry no results for your query!")
+    } else {
+      return(results)
+    }
   }
   if(task == "suggestDetails")
   {
@@ -130,12 +165,20 @@ rtematres <- function(task, verbose = F, term) {
       warning("This task only works for > 2 letters")
     }
     results = rtematres.api(task = "suggestDetails", argument = term)
-    return(results)
+    if(length(results$term) == 1 && all(is.na(results$term))){
+      warning("Sorry no results for your query!")
+    } else {
+      return(results)
+    }
   }
   if(task == "fetchSimilar")
   {
     results = rtematres.api(task = "fetchSimilar", argument = term)
-    return(results)
+    if(length(results$term) == 1 && all(is.na(results$term))){
+      warning("Sorry no results for your query!")
+    } else {
+      return(results)
+    }
   }
   if(task == "letter")
   {
@@ -143,56 +186,100 @@ rtematres <- function(task, verbose = F, term) {
       warning("This task only works for 1 letter input")
     }
     results = rtematres.api(task = "letter", argument = term)
-    return(results)
+    if(length(results$term) == 1 && all(is.na(results$term))){
+      warning("Sorry no results for your query!")
+    } else {
+      return(results)
+    }
   }
   if(task == "fetchAlt")
   {
     id = rtematres.api.conversion.term_id(term)
     results = rtematres.api(task = "fetchAlt", argument = id)
-    return(results)
+    if(length(results$term) == 1 && all(is.na(results$term))){
+      warning("Sorry no results for your query!")
+    } else {
+      return(results)
+    }
   }
   if(task == "fetchTerm")
   {
     id = rtematres.api.conversion.term_id(term)
     results = rtematres.api(task = "fetchTerm", argument = id)
-    return(results)
+    if(length(results$term) == 1 && all(is.na(results$term))){
+      warning("Sorry no results for your query!")
+    } else {
+      return(results)
+    }
   }
   if(task=="fetchDown")
   {
     id = rtematres.api.conversion.term_id(term)
     results = rtematres.api(task = "fetchDown", argument = id)
-    return(results$term)
+    # if(recurisve) {
+      # then fetch down a round as normal
+      # find terms hat have more terms down (has_narrower_terms)
+      # pick these only and fetch further down with the fetch down term
+	# NOTE: this is a loop task like the oters above
+	# e.g like paste(sapply(term, function(x) rtematres.api.conversion.term_id(x), USE.NAMES = F), collapse = ",")
+      #
+    # }
+    if(length(results$term) == 1 && all(is.na(results$term))){
+      warning("Sorry no results for your query!")
+    } else {
+      return(results)
+    }
   }
   if(task=="fetchUp")
   {
     id = rtematres.api.conversion.term_id(term)
     results = rtematres.api(task = "fetchUp", argument = id)
-    return(results$term)
+    if(length(results$term) == 1 && all(is.na(results$term))){
+      warning("Sorry no results for your query!")
+    } else {
+      return(results)
+    }
   }
   if(task == "fetchRelated")
   {
     id = rtematres.api.conversion.term_id(term)
     results = rtematres.api(task = "fetchRelated", argument = id)
-    return(results)
+    if(length(results$term) == 1 && all(is.na(results$term))){
+      warning("Sorry no results for your query!")
+    } else {
+      return(results)
+    }
   }
   if(task == "fetchNotes")
   {
     id = rtematres.api.conversion.term_id(term)
     results = rtematres.api(task = "fetchNotes", argument = id)
-    results$note_text = html.escape(results$note_text)
-    return(results)
+    results$note_text = html.sanitize(results$note_text)
+    if(length(results$term) == 1 && all(is.na(results$term))){
+      warning("Sorry no results for your query!")
+    } else {
+      return(results)
+    }
   }
   if(task == "fetchDirectTerms")
   {
     id = rtematres.api.conversion.term_id(term)
     results = rtematres.api(task = "fetchDirectTerms", argument = id)
-    return(results)
+    if(length(results$term) == 1 && all(is.na(results$term))){
+      warning("Sorry no results for your query!")
+    } else {
+      return(results)
+    }
   }
   if(task == "fetchURI")
   {
     id = rtematres.api.conversion.term_id(term)
     results = rtematres.api(task = "fetchURI", argument = id)
-    return(results)
+    if(length(results$term) == 1 && all(is.na(results$term))){
+      warning("Sorry no results for your query!")
+    } else {
+      return(results)
+    }
   }
   if(task == "fetchTargetTerms")
   {

@@ -1,3 +1,13 @@
+rtematres 0.4
+==================
+
+* Updates the documentation in varios places
+* Improves convenient functions
+  - adds error handling
+  - smarter search 
+  - Adding unit test to test the api calls
+* Adds new convenient functions
+
 rtematres 0.3
 ==================
 
@@ -9,8 +19,8 @@ rtematres 0.3
 
 * introduces new annotation features. 
   - These allow to find common concepts for contents in data frames
-  - It searches for the terms on tematres and makes a guess whats in 
-    your columns. It returns a annotation metadata object that can be used 
+  - It searches for the terms on tematres and makes a guess about the content
+    in columns. It returns a annotation metadata object that can be used 
     to start build up more sophisticated metadata automatically later on.
   - adds a few conversion and checking tools for iso dates. They try to 
     convert to ISO 8601 format for a few formats and give you feedback if

@@ -56,16 +56,16 @@ header.find.concept <- function(input) {
 }
 
 #' This is the annotation features provided by rtematres
-
-#' @param input to be annotated
-
+#'
 #' You can semantically annotate data frames base on a tematres
 #' thesaurus.
+#'
+#' @param input to be annotated takes a data frame
+#' @return a list wih annotation content
 
-#' @export annotate.dataframe
 annotate.dataframe <- function(input) {
    if(class(input) == "list") {
-    input = as.data.frame(input)
+      input = as.data.frame(input)
    }
 
    column_classes = sapply(input, class)
@@ -80,15 +80,19 @@ annotate.dataframe <- function(input) {
 		     "concepts_header" = concepts_header,
 		     "definitions_header" = definitions_header)
    annotation = do.call(cbind, annotation)
-   # class(annotation) <- "annotation"
+   class(annotation) <- "annotation"
    return(annotation)
 }
 
+#' You can semantically annotate data frames base on a tematres
+#' thesaurus wih cleaning the dataset
+#'
+#' @param input to be annotated takes a data frame
+#' @return a list wih annotation content
 
-#' @export annotate.dataframe
 annotate.dataframe.clean <- function(input) {
    if(class(input) == "list") {
-    input = as.data.frame(input)
+      input = as.data.frame(input)
    }
    column_classes = sapply(input, class)
 
@@ -96,6 +100,7 @@ annotate.dataframe.clean <- function(input) {
 
    concepts_body = content.find.concept(input)
    definitions_body = lapply(concepts_body, function(x) rtematres(task="fetchNote", term=x)$note_text)
+
    concepts_header = header.find.concept(input)
    definitions_header = lapply(names(input), function(x) rtematres(task="fetchNote", term=x)$note_text)
 
@@ -105,7 +110,7 @@ annotate.dataframe.clean <- function(input) {
 		     "concepts_header" = concepts_header,
 		     "definitions_header" = definitions_header)
    annotation = do.call(cbind, annotation)
-   # class(annotation) <- "annotation"
+   class(annotation) <- "annotation"
    return(annotation)
 }
 

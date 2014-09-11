@@ -61,21 +61,23 @@ rtematres.api <- function(task = "availableTasks", argument) {
 
 	tasks_need_no_argument = c("fetchLast", "fetchTopTerms", "fetchVocabularyData")
 
-	needs_api_one_four = c("fetch")
+	if(task %in% c("fetch")){
+		task.requires.api.version(task = task, task_needs_version = 1.4)
+	}
 
 	if(any(task == tasks_need_no_argument)) {
-	  url_param_sep = "?"
-	  param_sep = "&"
-	  task_trigger_name = "task"
-	  assignment = "="
-	  service_url = paste0(rtematres.options("tematres_service_url"), url_param_sep, task_trigger_name, assignment, task)
+		url_param_sep = "?"
+		param_sep = "&"
+		task_trigger_name = "task"
+		assignment = "="
+		service_url = paste0(rtematres.options("tematres_service_url"), url_param_sep, task_trigger_name, assignment, task)
 	} else {
-	  url_param_sep = "?"
-	  param_sep = "&"
-	  task_trigger_name = "task"
-	  arg_trigger_name = "arg"
-	  assignment = "="
-	  service_url = paste0(rtematres.options("tematres_service_url"), url_param_sep, task_trigger_name, assignment, task, param_sep, arg_trigger_name, assignment, argument )
+		url_param_sep = "?"
+		param_sep = "&"
+		task_trigger_name = "task"
+		arg_trigger_name = "arg"
+		assignment = "="
+		service_url = paste0(rtematres.options("tematres_service_url"), url_param_sep, task_trigger_name, assignment, task, param_sep, arg_trigger_name, assignment, argument )
 	}
 
 	response = xmlTreeParse(service_url, useInternalNodes = T)
@@ -267,9 +269,9 @@ rtematres.api <- function(task = "availableTasks", argument) {
 		       fetchLast = fetchLast_list
 		       )
 	if(is.list(sheme)) {
-	  rapply(sheme, function(x) xmlNodesValue(path=x, doc=response), how="replace")
+		rapply(sheme, function(x) xmlNodesValue(path=x, doc=response), how="replace")
 	} else {
-	  return(response)
+		return(response)
 	}
 }
 

@@ -1,6 +1,6 @@
 # clean html strings
 
-html.escape <- function(string) {
+html.sanitize <- function(string) {
   remove_tags = gsub("<.*?>", "", string)
   remove_newlines = gsub("\\n"," ",remove_tags)
   replace_escaped_quotes = gsub("\"", "'", remove_newlines)
@@ -11,6 +11,12 @@ html.escape <- function(string) {
   remove_unnecessary_ws = gsub("[ ]{2,}", " ", remove_leading_ws)
   cleaned_string = remove_unnecessary_ws
   return(cleaned_string)
+}
+
+string.trim <- function(input){
+  output = gsub("\\s*$", "", input)
+  output = gsub("^\\s*", "", output)
+  return(output)
 }
 
 # a wrapper function to xpathSApply. which will return NA instead of zero-lenght list when nodes not found
@@ -32,15 +38,18 @@ cleanstrings_snake <- function(input) {
    return(cleaned)
 }
 
-
-rtematres.api.conversion.term_id <- rtematres.api.conversion.id_term <- function(given) {
-  if(is.character(given)) {
-    the_id_is = rtematres.api(task = "fetch", argument = given)$term_id
-    return(the_id_is)
-  } else {
-    the_term_is = rtematres.api(task = "fetchTerms", argument = given)$term
-    return(the_term_is)
-  }
+rtematres.api.conversion.term_id <- rtematres.api.conversion.id_term <- function(given, warn = T) {
+	if(is.character(given)) {
+		response = rtematres.api(task = "search", argument = given)
+		the_id_is = response$term_id[which(response$term == given)]
+		if(length(the_id_is) == 0 && warn) warning("Sorry no such term available!")
+		return(the_id_is)
+	} else {
+		response = rtematres.api(task = "fetchTerm", argument = given)
+		the_term_is = response$term[which(response$term_id == given)]
+		if(length(the_term_is) == 0 && warn) warning("Sorry no such id available!")
+		return(the_term_is)
+	}
 }
 
 are.we.competible <- function(package_api_version = rtematres.options("tematres_api_version"), server_api_version = rtematres.api(task = "fetchVocabularyData")$api_version) {
@@ -50,6 +59,12 @@ are.we.competible <- function(package_api_version = rtematres.options("tematres_
     warning(paste0("You can try to change version number of the package with rtematres.options('tematres_api_version' = xy)"))
     warning(paste0("You can try to change version number of the package to fit the server with bef.options('tematres_api_version' = xy)"))
     warning(paste0("But no guaranty that all will work properly!"))
+  }
+}
+
+task.requires.api.version <- function(task_needs_version, task, server_api_version = rtematres.api(task = "fetchVocabularyData")$api_version) {
+  if(server_api_version != task_needs_version) {
+    stop(paste0("The task: ", task, "needs api version ", task_needs_version, "but server is at ", server_api_version))
   }
 }
 
@@ -118,22 +133,22 @@ in.range.year <- function(input) {
   grepl("^[1-9][0-9]{3}$", input[!is.na(input)])
 }
 
-# check for valid months
+# check for valid months range
 in.range.month <- function(input) {
   if(any(is.na(input))) warning("There is a few values missing in your input. I ignore them!")
   grepl("(^0?[1-9]$|^[1][0-2]$)", input)
 }
 
-# check for valid days
+# check for valid days range
 in.range.day <- function(input) {
   if(any(is.na(input))) warning("There is a few values missing in your input. I ignore them!")
   grepl("(^0?[1-9]$|^[12][0-9]$|^3[01]$)", input)
 }
 
-# get year range
+# get year range from character vector containing years
 years.to.range <- function(input){
   if(class(input) != "numeric") input = as.numeric(input)
-  if(!any(in.range.year(input))) stop("Not all are valid years")
+  if(!any(in.range.year(input))) stop("Not all input has format of a valid year")
   range <- max(input) - min(input)
   return(range)
 }
@@ -155,3 +170,24 @@ string.empty.rm <- function(input){
 unless.input.numeric.stop <- function(input){
   if(class(input) != "numeric") stop("This task only takes a number as input")
 }
+
+
+# find common concepts in character columns
+setGeneric("find.common.concept", function(x) {
+			  standardGeneric("find.common.concept")
+})
+
+setMethod("find.common.concept",
+	  c(x = "character"),
+	  function(x) {
+	     upstream_concepts = sapply(x, function(x) rtematres(task = "fetchUp", term = x)$term, simplify = FALSE, USE.NAMES = TRUE)
+	     common_concepts = Reduce(intersect, upstream_concepts)
+	     common_concept = common_concepts[length(common_concepts)]
+	     if(identical(common_concepts, character(0))) {
+		return(NA)
+	     } else {
+		return(common_concept)
+	     }
+	  }
+	  )
+

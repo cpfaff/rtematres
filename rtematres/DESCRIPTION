@@ -1,12 +1,12 @@
 Package: rtematres
-Title: The rtematres API package
-Description: Exploit controlled vocabularies hosted on a tematres server and
-    annotate data for metadata creation.
+Title: Exploit vocabularies on tematres server.
+Description: Exploit vocabularies on tematres server and annotate data frames
+    in R.
 Version: 0.3
 Author: Claas-Thido Pfaff <claas-thido.pfaff@idiv-biodiversity.de>
 Maintainer: Claas-Thido Pfaff <claas-thido.pfaff@idiv-biodiversity.de>
 Authors@R: c(person("Claas-Thido", "Pfaff", role = c("aut", "cre"), email =
-    "ctpfaff@arcor.de"))
+    "claas-thido.pfaff@idiv-biodiversity.de"))
 URL: https://github.com/cpfaff/rtematres
 BugReports: https://github.com/cpfaff/rtematres/issues
 VignetteBuilder: knitr
@@ -18,6 +18,6 @@ Imports:
     XML,
     RCurl,
     plyr,
-    gdata,
+    gdata
 Date: 2013-08-13
 License: GPL-3
