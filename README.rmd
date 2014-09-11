@@ -3,7 +3,7 @@
 ```{r include = F, eval =T}
 require(devtools)
 remove.packages("rtematres")
-install_github(username = "cpfaff", repo = "rtematres", subdir = "rtematres") 
+install_github("cpfaff/rtematres", subdir = "rtematres") 
 require(rtematres)
 ```
 
@@ -76,15 +76,14 @@ on your tematres vocabulary server.
 * search
 
 Search for terms by name. If you search for one letter it will list all terms
-that begin with the letter. As you see there is a subsetting done. This is
-because of the function returns are more verbose.
+that begin with the letter. 
 
 ```{r}
-rtematres.search(term = "plant")$term
+rtematres.search(term = "plant")
 ```
 
 ```{r}
-rtematres.search(term = "p")$term
+rtematres.search(term = "p")
 ```
 
 * define
@@ -92,7 +91,26 @@ rtematres.search(term = "p")$term
 Fetches definitions from definition notes of a concept in your thesaurus.
 
 ```{r}
-rtematres.define("plant organ")$note_text
+rtematres.define("plant organ")
+```
+
+* locate
+
+To locate a certain term in its hierarchy
+
+
+```{r}
+rtematres.hierarchy("plant organ")
+```
+
+* find common concepts of factorial vectors
+
+```{r}
+rtematres.common(c("carbon", "nitrogen"))
+```
+
+```{r}
+rtematres.summary(iris)
 ```
 
 * broaden/narrow
@@ -116,20 +134,6 @@ This example uses the tematres server of the BEF-China project:
 ```{r}
 rtematres(task = "fetchVocabularyData")
 ```
-
-## Annotate data frames
-
-* Example 
-
-```{r}
-tree <- c(1,2,3,4,5,6,7,8, 9)                        
-plantorgan <- c("branch","flower","fruit","inflorescence", "leaf","seed", "twig", "branch", "leaf")                        
-species <- c("acer platanum","fagus sylvatica","betula pendula","acer platanum", "fagus sylvatica","fagus sylvatica", "fagus sylvatica", "Viburnum sempervirens", "lala pubescens")                        
-myframe <- data.frame(tree = tree, "plant organ" = plantorgan, "species names" = species)
-annotate.dataframe(myframe)
-```
-
-
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/cpfaff/rtematres/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
