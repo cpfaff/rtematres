@@ -33,16 +33,16 @@ rtematres.define <- function(term) {
 rtematres.search <- function(term) {
   if(nchar(term) == 1)
   {
-    results = suppressWarnings(rtematres(task = "letter", term = term)$term)
+    results = suppressWarnings(rtematres(task = "letter", term = term))
   } else {
-    results = suppressWarnings(rtematres(task = "search", term = term)$term)
+    results = suppressWarnings(rtematres(task = "search", term = term))
   }
   if(length(results$term) == 1 && all(is.na(results$term)) || is.null(results)){
     suggestion = rtematres(task = "fetchSimilar", term = term)$term
     warning(paste("Sorry no results for your query!", "Do you mean:", suggestion))
     return(suggestion)
   } else {
-    return(results)
+    return(results$term)
   }
 }
 
