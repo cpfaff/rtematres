@@ -176,4 +176,14 @@ summary and for categorical, character vectors find the common concept.
 lapply(iris, function(x) rtematres.summary(x))
 ```
 
+* Information summary 
+
+A wrapper to aggregate multiple calls for information on a single term 
+
+
+```{r}
+rtematres.illuminate("nitrogen fixation")
+```
+
+
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/cpfaff/rtematres/trend.png)](https://bitdeli.com/free "Bitdeli Badge")

@@ -156,20 +156,7 @@ rtematres(task = "fetchUp", term = "plant organ")
 ```
 
 ```
-## $term
 ## [1] "entity"      "eukaryotes"  "plant"       "plant part"  "plant organ"
-## 
-## $term_id
-## [1] "348" "365" "415" "436" "446"
-## 
-## $is.meta.term
-## [1] "0" "0" "0" "0" "0"
-## 
-## $relation_type_id
-## [1] NA
-## 
-## $order
-## [1] "1" "2" "3" "4" "5"
 ```
 
 
@@ -178,30 +165,8 @@ rtematres(task = "fetchDown", term = "plant organ")
 ```
 
 ```
-## $term
 ## [1] "branch"        "flower"        "fruit"         "inflorescence"
-## [5] "leaf"          "seed"          "twig"         
-## 
-## $language
-## [1] NA
-## 
-## $term_id
-## [1] "456" "447" "449" "450" "451" "454" "457"
-## 
-## $is.meta.term
-## [1] NA
-## 
-## $relation_type
-## [1] "NT" "NT" "NT" "NT" "NT" "NT" "NT"
-## 
-## $relation_code
-## [1] NA
-## 
-## $relation_label
-## [1] NA
-## 
-## $has_narrower_terms
-## [1] "0" "1" "0" "0" "1" "0" "0"
+## [5] "leaf"          "seed"          "twig"
 ```
 
 And many more tasks are supported....
@@ -448,5 +413,30 @@ lapply(iris, function(x) rtematres.summary(x))
 ## $Species
 ## [1] NA
 ```
+
+* Information summary 
+
+A wrapper to aggregate multiple calls for information on a single term 
+
+
+
+```r
+rtematres.illuminate("nitrogen fixation")
+```
+
+```
+## $concept_definition
+## [1] "Nitrogen fixation is a process that turns atmospheric nitrogen (N2) into ammonium (NH4)"
+## 
+## $upstream_concepts
+## [1] "process"           "nitrogen fixation"
+## 
+## $downstream_concepts
+## NULL
+## 
+## $direct_related_concepts
+## NULL
+```
+
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/cpfaff/rtematres/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
