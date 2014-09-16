@@ -9,7 +9,8 @@ html.sanitize <- function(string) {
   remove_trailing_ws = gsub("\\s*$", "", remove_empty_brackets)
   remove_leading_ws = gsub("^\\s*", "", remove_trailing_ws)
   remove_unnecessary_ws = gsub("[ ]{2,}", " ", remove_leading_ws)
-  cleaned_string = remove_unnecessary_ws
+  remove_nbsp = gsub("&nbsp;", " ", remove_unnecessary_ws)
+  cleaned_string = remove_nbsp
   return(cleaned_string)
 }
 

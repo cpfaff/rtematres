@@ -39,7 +39,6 @@
 #' @export rtematres
 
 rtematres <- function(task, verbose = F, term) {
-  is_verbose = verbose
 
   task = match.arg(task, c("availableTasks","fetchVocabularyData", "suggest", "suggestDetails", "fetchTopTerms", "search", "fetch", "searchNotes", "fetchCode", "fetchSimilar", "letter", "fetchTerm", "fetchAlt", "fetchDown", "fetchUp", "fetchRelated", "fetchNotes", "fetchDirectTerms", "fetchURI", "fetchTargetTerms", "fetchSourceTerms", "fetchTerms", "fetchRelatedTerms", "fetchLast"))
 
@@ -58,7 +57,10 @@ rtematres <- function(task, verbose = F, term) {
   if(task == "fetchTopTerms")
   {
     results = rtematres.api(task = "fetchTopTerms")
-    return(results)
+    if(verbose)
+      return(results)
+    else
+      return(results$term)
   }
   if(task == "fetchLast")
   {
@@ -66,7 +68,10 @@ rtematres <- function(task, verbose = F, term) {
     if(length(results$term) == 1 && all(is.na(results$term))){
       warning("Sorry no results for your query!")
     } else {
-      return(results)
+      if(verbose)
+	return(results)
+      else
+	return(results$term)
     }
   }
 
@@ -118,7 +123,7 @@ rtematres <- function(task, verbose = F, term) {
     if(length(results$term) == 1 && all(is.na(results$term))){
       warning("Sorry no results for your query!")
     } else {
-      return(results)
+      return(results$term)
     }
 
   }
@@ -144,7 +149,10 @@ rtematres <- function(task, verbose = F, term) {
     if(length(results$term) == 1 && all(is.na(results$term))){
       warning("Sorry no results for your query!")
     } else {
-      return(results)
+      if(verbose)
+	return(results)
+      else
+	return(results$term)
     }
   }
   if(task == "suggest")
@@ -168,7 +176,10 @@ rtematres <- function(task, verbose = F, term) {
     if(length(results$term) == 1 && all(is.na(results$term))){
       warning("Sorry no results for your query!")
     } else {
-      return(results)
+      if(verbose)
+	return(results)
+      else
+	return(results$term)
     }
   }
   if(task == "fetchSimilar")
@@ -177,7 +188,10 @@ rtematres <- function(task, verbose = F, term) {
     if(length(results$term) == 1 && all(is.na(results$term))){
       warning("Sorry no results for your query!")
     } else {
-      return(results)
+      if(verbose)
+	return(results)
+      else
+	return(results$term)
     }
   }
   if(task == "letter")
@@ -189,7 +203,7 @@ rtematres <- function(task, verbose = F, term) {
     if(length(results$term) == 1 && all(is.na(results$term))){
       warning("Sorry no results for your query!")
     } else {
-      return(results)
+      return(results$term)
     }
   }
   if(task == "fetchAlt")
@@ -199,7 +213,10 @@ rtematres <- function(task, verbose = F, term) {
     if(length(results$term) == 1 && all(is.na(results$term))){
       warning("Sorry no results for your query!")
     } else {
-      return(results)
+      if(verbose)
+	return(results)
+      else
+	return(results$term)
     }
   }
   if(task == "fetchTerm")
@@ -227,7 +244,10 @@ rtematres <- function(task, verbose = F, term) {
     if(length(results$term) == 1 && all(is.na(results$term))){
       warning("Sorry no results for your query!")
     } else {
-      return(results)
+      if(verbose)
+	return(results)
+      else
+	return(results$term)
     }
   }
   if(task=="fetchUp")
@@ -237,7 +257,10 @@ rtematres <- function(task, verbose = F, term) {
     if(length(results$term) == 1 && all(is.na(results$term))){
       warning("Sorry no results for your query!")
     } else {
-      return(results)
+      if(verbose)
+	return(results)
+      else
+	return(results$term)
     }
   }
   if(task == "fetchRelated")
@@ -247,7 +270,10 @@ rtematres <- function(task, verbose = F, term) {
     if(length(results$term) == 1 && all(is.na(results$term))){
       warning("Sorry no results for your query!")
     } else {
-      return(results)
+      if(verbose)
+	return(results)
+      else
+	return(results$term)
     }
   }
   if(task == "fetchNotes")
@@ -258,7 +284,10 @@ rtematres <- function(task, verbose = F, term) {
     if(length(results$term) == 1 && all(is.na(results$term))){
       warning("Sorry no results for your query!")
     } else {
-      return(results)
+      if(verbose)
+	return(results)
+      else
+	return(results$note_text)
     }
   }
   if(task == "fetchDirectTerms")
@@ -286,12 +315,14 @@ rtematres <- function(task, verbose = F, term) {
     if(class(term) != "character") stop("This task only takes a string as input")
     id = rtematres.api.conversion.term_id(term)
     results = rtematres.api(task = "fetchTargetTerms", argument = id)
-    return(results)
+    if(verbose)
+      return(results)
+    else
+      return(results$term)
   }
   if(task == "fetchSourceTerms")
   {
     id = rtematres.api.conversion.term_id(term)
     results = rtematres.api(task = "fetchSourceTerms", argument = id)
-    return(results)
   }
 }
