@@ -10,7 +10,6 @@
 #' @return The function returns either a dataframe for information or a list
 #'         of keywords and ids
 #' @examples \dontrun{
-#'     rtematres(task = "availableTasks")
 #'     rtematres(task = "fetchVocabularyData")
 #'     rtematres(task = "fetchTopTerms")
 #'     rtematres(task = "fetchCode", term = "tree")
@@ -40,14 +39,7 @@
 
 rtematres <- function(task, verbose = F, term) {
 
-  task = match.arg(task, c("availableTasks","fetchVocabularyData", "suggest", "suggestDetails", "fetchTopTerms", "search", "fetch", "searchNotes", "fetchCode", "fetchSimilar", "letter", "fetchTerm", "fetchAlt", "fetchDown", "fetchUp", "fetchRelated", "fetchNotes", "fetchDirectTerms", "fetchURI", "fetchTargetTerms", "fetchSourceTerms", "fetchTerms", "fetchRelatedTerms", "fetchLast"))
-
-  # task only tasks
-  if(task == "availableTasks")
-  {
-    results = rtematres.api(task = "availableTasks")
-    return(results)
-  }
+  task = match.arg(task, c("fetchVocabularyData", "suggest", "suggestDetails", "fetchTopTerms", "search", "fetch", "searchNotes", "fetchCode", "fetchSimilar", "letter", "fetchTerm", "fetchAlt", "fetchDown", "fetchUp", "fetchRelated", "fetchNotes", "fetchDirectTerms", "fetchURI", "fetchTargetTerms", "fetchSourceTerms", "fetchTerms", "fetchRelatedTerms", "fetchLast"))
 
   if(task == "fetchVocabularyData")
   {

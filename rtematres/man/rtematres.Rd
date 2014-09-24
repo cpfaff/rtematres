@@ -28,7 +28,6 @@ rtematres A package to exploit controlled vocabularies from tematres servers
 }
 \examples{
 \dontrun{
-    rtematres(task = "availableTasks")
     rtematres(task = "fetchVocabularyData")
     rtematres(task = "fetchTopTerms")
     rtematres(task = "fetchCode", term = "tree")

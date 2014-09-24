@@ -108,40 +108,40 @@ rtematres(task = "fetchVocabularyData")
 ## [1] "en"
 ## 
 ## $scope
-## [1] "biology"
+## [1] NA
 ## 
 ## $keywords
-## [1] "biology, ecosystem functioning, ecosystem service,"
+## [1] NA
 ## 
 ## $uri
 ## [1] "http://tematres.befdata.biow.uni-leipzig.de/vocab/"
 ## 
 ## $created_at
-## [1] "2014-01-01"
+## [1] "2014-09-16"
 ## 
 ## $last_modified_at
-## [1] "2014-02-06 09:30:07"
+## [1] "2014-09-16 21:50:52"
 ## 
 ## $contributors
 ## [1] NA
 ## 
 ## $publisher
-## [1] "BEFdata"
+## [1] NA
 ## 
 ## $rights
-## [1] "all rights reserved"
+## [1] NA
 ## 
 ## $count_of_terms
-## [1] "1019"
+## [1] "946"
 ## 
 ## $status
 ## [1] "available"
 ## 
 ## $server_version
-## [1] "TemaTres 1.72"
+## [1] "TemaTres 1.8"
 ## 
 ## $api_version
-## [1] "1.4"
+## [1] "1.5"
 ```
 
 #### Base functionality
@@ -166,7 +166,8 @@ rtematres(task = "fetchDown", term = "plant organ")
 
 ```
 ## [1] "branch"        "flower"        "fruit"         "inflorescence"
-## [5] "leaf"          "seed"          "twig"
+## [5] "leaf"          "root"          "seed"          "stem"         
+## [9] "twig"
 ```
 
 And many more tasks are supported....
@@ -209,20 +210,19 @@ rtematres.search("plant")
 ##  [7] "plant growth"                                 
 ##  [8] "plant growth state"                           
 ##  [9] "plant insect interaction"                     
-## [10] "plant nursery"                                
-## [11] "plant organ"                                  
-## [12] "plant part"                                   
-## [13] "plant pollinator interaction"                 
-## [14] "plant population"                             
-## [15] "plant position"                               
-## [16] "plant related characteristics"                
-## [17] "plant secretion"                              
-## [18] "plant species abundance"                      
-## [19] "plant species name"                           
-## [20] "plant species occurrence"                     
-## [21] "plant-soil interaction"                       
-## [22] "plantago lanceolata"                          
-## [23] "vascular plant"
+## [10] "plant organ"                                  
+## [11] "plant part"                                   
+## [12] "plant pollinator interaction"                 
+## [13] "plant population"                             
+## [14] "plant position"                               
+## [15] "plant related characteristics"                
+## [16] "plant secretion"                              
+## [17] "plant species abundance"                      
+## [18] "plant species name"                           
+## [19] "plant species occurrence"                     
+## [20] "plant-soil interaction"                       
+## [21] "plantago lanceolata"                          
+## [22] "vascular plant"
 ```
 
 If you search for one letter only it will list all terms that begin with the
@@ -238,9 +238,9 @@ rtematres.search("p")
 ##  [2] "P: biotop"                         
 ##  [3] "P: ecoregion"                      
 ##  [4] "P: habitat"                        
-##  [5] "parasite"                          
-##  [6] "parasitical"                       
-##  [7] "parasitism"                        
+##  [5] "P: subplots"                       
+##  [6] "parasite"                          
+##  [7] "parasitical"                       
 ##  [8] "parasitoid abundance"              
 ##  [9] "parasitoids olfactory orientation" 
 ## [10] "parent"                            
@@ -262,64 +262,61 @@ rtematres.search("p")
 ## [26] "phyllosphere"                      
 ## [27] "phylogenetic distinctness"         
 ## [28] "phylogenetic diversity"            
-## [29] "phylum"                            
-## [30] "phytometer"                        
-## [31] "phytosymbiosis"                    
-## [32] "pine"                              
-## [33] "planar curvature"                  
-## [34] "plant"                             
-## [35] "plant determination"               
-## [36] "plant diversity"                   
-## [37] "plant growth"                      
-## [38] "plant growth state"                
-## [39] "plant insect interaction"          
-## [40] "plant nursery"                     
-## [41] "plant organ"                       
-## [42] "plant part"                        
-## [43] "plant pollinator interaction"      
-## [44] "plant population"                  
-## [45] "plant position"                    
-## [46] "plant related characteristics"     
-## [47] "plant secretion"                   
-## [48] "plant species abundance"           
-## [49] "plant species name"                
-## [50] "plant species occurrence"          
-## [51] "plant-soil interaction"            
-## [52] "plantago lanceolata"               
-## [53] "plot"                              
-## [54] "plot charts"                       
-## [55] "po4"                               
-## [56] "pollen"                            
-## [57] "pollination"                       
-## [58] "polygon"                           
-## [59] "polymorphic nuclear microsatellite"
-## [60] "polyphenols"                       
-## [61] "population"                        
-## [62] "population genetics"               
-## [63] "pore volume"                       
-## [64] "porosity"                          
-## [65] "position"                          
-## [66] "potassium"                         
-## [67] "powdery mildew"                    
-## [68] "precipitation"                     
-## [69] "precision"                         
-## [70] "predation"                         
-## [71] "predation"                         
-## [72] "predator abundance"                
-## [73] "predator diversity"                
-## [74] "predator-prey interactions"        
-## [75] "predatoric"                        
-## [76] "present"                           
-## [77] "primary metabolites"               
-## [78] "principal component analysis"      
-## [79] "process"                           
-## [80] "productivity"                      
-## [81] "profile curvature"                 
-## [82] "prokaryotes"                       
-## [83] "protein"                           
-## [84] "protist"                           
-## [85] "protist diversity"                 
-## [86] "pyrosequencing"
+## [29] "phytometer"                        
+## [30] "phytosymbiosis"                    
+## [31] "pine"                              
+## [32] "planar curvature"                  
+## [33] "plant"                             
+## [34] "plant determination"               
+## [35] "plant diversity"                   
+## [36] "plant growth"                      
+## [37] "plant growth state"                
+## [38] "plant insect interaction"          
+## [39] "plant organ"                       
+## [40] "plant part"                        
+## [41] "plant pollinator interaction"      
+## [42] "plant population"                  
+## [43] "plant position"                    
+## [44] "plant related characteristics"     
+## [45] "plant secretion"                   
+## [46] "plant species abundance"           
+## [47] "plant species name"                
+## [48] "plant species occurrence"          
+## [49] "plant-soil interaction"            
+## [50] "plantago lanceolata"               
+## [51] "plot"                              
+## [52] "plot charts"                       
+## [53] "po4"                               
+## [54] "pollen"                            
+## [55] "pollination"                       
+## [56] "polygon"                           
+## [57] "polymorphic nuclear microsatellite"
+## [58] "polyphenols"                       
+## [59] "population"                        
+## [60] "population genetics"               
+## [61] "pore volume"                       
+## [62] "porosity"                          
+## [63] "position"                          
+## [64] "potassium"                         
+## [65] "powdery mildew"                    
+## [66] "precipitation"                     
+## [67] "precision"                         
+## [68] "predation"                         
+## [69] "predator abundance"                
+## [70] "predator diversity"                
+## [71] "predator-prey interactions"        
+## [72] "predatoric"                        
+## [73] "present"                           
+## [74] "primary metabolites"               
+## [75] "principal component analysis"      
+## [76] "process"                           
+## [77] "productivity"                      
+## [78] "profile curvature"                 
+## [79] "prokaryotes"                       
+## [80] "protein"                           
+## [81] "protist"                           
+## [82] "protist diversity"                 
+## [83] "pyrosequencing"
 ```
 
 It also offers a suggestion mechanism
@@ -330,11 +327,11 @@ rtematres.search("siol")
 ```
 
 ```
-## Warning: Sorry no results for your query! Do you mean: soil
+## Warning: Sorry no results for your query! Do you mean: diel
 ```
 
 ```
-## [1] "soil"
+## [1] "diel"
 ```
 
 * Define
@@ -347,7 +344,7 @@ rtematres.define("plant organ")
 ```
 
 ```
-## [1] "plant organ - a functional and structural unit of a plant"
+## Warning: Sorry no definition for your term found!
 ```
 
 * Locate
@@ -363,7 +360,8 @@ rtematres.hierarchy("plant organ")
 ```
 ##  [1] "entity"        "eukaryotes"    "plant"         "plant part"   
 ##  [5] "plant organ"   "branch"        "flower"        "fruit"        
-##  [9] "inflorescence" "leaf"          "seed"          "twig"
+##  [9] "inflorescence" "leaf"          "root"          "seed"         
+## [13] "stem"          "twig"
 ```
 
 * Find common concepts
@@ -426,10 +424,10 @@ rtematres.illuminate("nitrogen fixation")
 
 ```
 ## $concept_definition
-## [1] "Nitrogen fixation is a process that turns atmospheric nitrogen (N2) into ammonium (NH4)"
+## [1] NA
 ## 
 ## $upstream_concepts
-## [1] "process"           "nitrogen fixation"
+## [1] "entity"            "process"           "nitrogen fixation"
 ## 
 ## $downstream_concepts
 ## NULL
